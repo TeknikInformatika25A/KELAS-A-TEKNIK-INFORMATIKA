@@ -890,4 +890,49 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
 })();
 </script>
 </body>
+  <style>
+:root[data-theme="hijau"] {
+  --bg: #EEF6F0; --surface: #FFFFFF; --ink: #10241A; --muted: #4F6B5B;
+  --line: #C5D9CC; --accent: #1E8A4C; --mark: #7ED957; --mark-ink: #10241A;
+  color-scheme: light;
+}
+:root[data-theme="ungu"] {
+  --bg: #14101F; --surface: #1D1830; --ink: #EEE9FA; --muted: #A89DC4;
+  --line: #3A2F5C; --accent: #B79CFF; --mark: #FFC83D; --mark-ink: #14101F;
+  color-scheme: dark;
+}
+:root[data-theme="oranye"] {
+  --bg: #FFF4E8; --surface: #FFFFFF; --ink: #2A1606; --muted: #7A5A3C;
+  --line: #EBCFB2; --accent: #D9560B; --mark: #FFB020; --mark-ink: #2A1606;
+  color-scheme: light;
+}
+</style>
+<script>
+(function () {
+  var DAFTAR = [["light","Terang"],["dark","Gelap"],["hijau","Hijau"],["ungu","Ungu"],["oranye","Oranye"]];
+  var r = document.documentElement;
+  var b = document.getElementById("themeBtn");
+  function indeks() {
+    var t = r.getAttribute("data-theme");
+    if (!t) t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+    for (var i = 0; i < DAFTAR.length; i++) { if (DAFTAR[i][0] === t) return i; }
+    return 0;
+  }
+  function pasang(i) {
+    r.setAttribute("data-theme", DAFTAR[i][0]);
+    b.textContent = DAFTAR[i][1];
+    try { localStorage.setItem("kelasA-tema", DAFTAR[i][0]); } catch (e) {}
+  }
+  var simpan = null;
+  try { simpan = localStorage.getItem("kelasA-tema"); } catch (e) {}
+  for (var i = 0; i < DAFTAR.length; i++) {
+    if (DAFTAR[i][0] === simpan) { pasang(i); break; }
+  }
+  b.textContent = DAFTAR[indeks()][1];
+  b.addEventListener("click", function (e) {
+    e.stopImmediatePropagation();
+    pasang((indeks() + 1) % DAFTAR.length);
+  }, true);
+})();
+</script>
 </html>
