@@ -480,40 +480,6 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   * { transition: none !important; }
 }
 </style>
-  /* Animasi logo melayang - Kelas A Teknik Informatika */
-
-#logo img {
-  animation: melayang 4s ease-in-out infinite;
-  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.25));
-  will-change: transform;
-}
-
-/* Logo kedua bergerak dengan jeda berbeda agar tidak serempak */
-#logo li:nth-child(2) img {
-  animation-delay: -2s;
-}
-
-/* Berhenti melayang saat kursor diarahkan ke logo */
-#logo img:hover {
-  animation-play-state: paused;
-}
-
-@keyframes melayang {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-1deg);
-  }
-  50% {
-    transform: translateY(-14px) rotate(1deg);
-  }
-}
-
-/* Hormati pengguna yang mematikan animasi di perangkatnya */
-@media (prefers-reduced-motion: reduce) {
-  #logo img {
-    animation: none;
-  }
-}
 </head>
 <body>
 <header class="site-header">
