@@ -479,7 +479,52 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
-</style>
+  /* latar hero bergerak */
+.hero {
+  position: relative;
+  isolation: isolate;   /* supaya latar tidak tembus ke belakang halaman */
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -50%;          /* lebih besar dari hero, supaya tepinya tidak kelihatan saat bergerak */
+  z-index: -1;
+  background:
+    radial-gradient(circle at 30% 35%, rgba(31, 94, 255, .22), transparent 45%),
+    radial-gradient(circle at 70% 60%, rgba(122, 75, 214, .18), transparent 45%),
+    radial-gradient(circle at 45% 80%, rgba(15, 157, 138, .16), transparent 45%);
+  animation: latar 18s ease-in-out infinite alternate;
+}
+
+@keyframes latar {
+  from { transform: translate(-4%, -3%) rotate(0deg) scale(1); }
+  to   { transform: translate(4%, 3%) rotate(12deg) scale(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before { animation: none; }
+}
+/* logo melayang */
+@keyframes melayang {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+#logo img {
+  animation: melayang 4s ease-in-out infinite;
+}
+
+/* logo kedua bergerak berselang, jadi tidak kaku bersamaan */
+#logo li:nth-child(2) img {
+  animation-delay: -2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #logo img { animation: none; }
+}
+  </style>
 </head>
 <body>
 <header class="site-header">
@@ -513,55 +558,6 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
           <a class="btn ghost" href="#anggota">Daftar anggota</a>
         </div>
       </div>
-
-          <!-- KELAS -->
-          <rect class="ent-box" x="10" y="10" width="180" height="94"/>
-          <rect class="ent-head" x="10" y="10" width="180" height="28"/>
-          <text class="ent-title" x="22" y="29">KELAS</text>
-          <line class="sep" x1="10" y1="60" x2="190" y2="60"/>
-          <line class="sep" x1="10" y1="82" x2="190" y2="82"/>
-          <text class="key" x="22" y="54">PK</text><text class="attr" x="48" y="54">kode_kelas</text>
-          <text class="attr" x="48" y="76">prodi</text>
-          <text class="attr" x="48" y="98">angkatan</text>
-
-          <!-- MAHASISWA -->
-          <rect class="ent-box" x="10" y="176" width="180" height="94"/>
-          <rect class="ent-head" x="10" y="176" width="180" height="28"/>
-          <text class="ent-title" x="22" y="195">MAHASISWA</text>
-          <line class="sep" x1="10" y1="226" x2="190" y2="226"/>
-          <line class="sep" x1="10" y1="248" x2="190" y2="248"/>
-          <text class="key" x="22" y="220">PK</text><text class="attr" x="48" y="220">nim</text>
-          <text class="attr" x="48" y="242">nama</text>
-          <text class="key" x="22" y="264">FK</text><text class="attr" x="48" y="264">kode_kelas</text>
-
-          <!-- MATA_KULIAH -->
-          <rect class="ent-box" x="290" y="176" width="180" height="94"/>
-          <rect class="ent-head" x="290" y="176" width="180" height="28"/>
-          <text class="ent-title" x="302" y="195">MATA_KULIAH</text>
-          <line class="sep" x1="290" y1="226" x2="470" y2="226"/>
-          <line class="sep" x1="290" y1="248" x2="470" y2="248"/>
-          <text class="key" x="302" y="220">PK</text><text class="attr" x="328" y="220">kode_mk</text>
-          <text class="attr" x="328" y="242">nama_mk</text>
-          <text class="attr" x="328" y="264">sks</text>
-
-          <!-- KELAS 1 : N MAHASISWA -->
-          <line class="rel" x1="100" y1="104" x2="100" y2="176"/>
-          <line class="rel" x1="92" y1="114" x2="108" y2="114"/>
-          <line class="rel" x1="92" y1="121" x2="108" y2="121"/>
-          <line class="rel" x1="100" y1="160" x2="88" y2="176"/>
-          <line class="rel" x1="100" y1="160" x2="112" y2="176"/>
-          <text class="rel-label" x="118" y="144">memiliki</text>
-
-          <!-- MAHASISWA N : M MATA_KULIAH -->
-          <line class="rel" x1="190" y1="223" x2="290" y2="223"/>
-          <line class="rel" x1="206" y1="223" x2="190" y2="211"/>
-          <line class="rel" x1="206" y1="223" x2="190" y2="235"/>
-          <line class="rel" x1="274" y1="223" x2="290" y2="211"/>
-          <line class="rel" x1="274" y1="223" x2="290" y2="235"/>
-          <text class="rel-label" x="240" y="252" text-anchor="middle">mengambil</text>
-        </svg>
-        <figcaption>Gambar 1. ERD sederhana kelas. Satu kelas memiliki banyak mahasiswa, dan mahasiswa mengambil banyak mata kuliah.</figcaption>
-      </figure>
     </div>
   </div>
 
