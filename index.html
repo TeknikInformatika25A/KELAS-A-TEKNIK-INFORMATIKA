@@ -1013,24 +1013,7 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
       }
     })(0);
   }
-
-  // 2. terminal mengetik
-  var t=document.createElement('div');t.className='terminal';t.setAttribute('aria-hidden','true');
-  var o=document.createElement('span'),k=document.createElement('span');k.className='kursor';
-  t.appendChild(o);t.appendChild(k);
-  var lead=hero.querySelector('.lead');
-  if(lead)lead.insertAdjacentElement('afterend',t);else hero.appendChild(t);
-  var teks=['$ npm run kelas-a','> memuat anggota... selesai','> status: online'];
-  if(kurang){o.textContent=teks.join('\n');}
-  else{
-    var i=0,j=0,s='';
-    (function step(){
-      if(i>=teks.length)return;
-      if(j<teks[i].length){s+=teks[i][j++];o.textContent=s;setTimeout(step,i===0?60:25);}
-      else{i++;j=0;s+='\n';setTimeout(step,i===1?500:300);}
-    })();
-  }
-
+  
   // 3. glitch pada judul
   var g=hero.querySelector('.h1-top');
   if(g&&!kurang){
