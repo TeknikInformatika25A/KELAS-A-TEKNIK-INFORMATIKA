@@ -524,6 +524,34 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
 @media (prefers-reduced-motion: reduce) {
   #logo img { animation: none; }
 }
+  
+/* ===== EFEK INFORMATIKA ===== */
+/* hujan kode */
+.hero canvas.kode{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.55;pointer-events:none}
+
+/* terminal mengetik */
+.terminal{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92rem;white-space:pre-wrap;background:rgba(10,16,32,.92);color:#9dffb8;border-radius:10px;padding:12px 14px;margin:0 0 24px;max-width:46ch;min-height:5.2em}
+.terminal .kursor{display:inline-block;width:.6em;height:1.1em;background:#9dffb8;vertical-align:-3px;animation:kedip 1s steps(1) infinite}
+@keyframes kedip{50%{opacity:0}}
+
+/* glitch pada judul */
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0}
+.glitch::before{color:#ff2d6f;clip-path:inset(0 0 55% 0)}
+.glitch::after{color:#00e5ff;clip-path:inset(55% 0 0 0)}
+.glitch.aktif::before{opacity:.85;animation:ga .38s steps(2) 1}
+.glitch.aktif::after{opacity:.85;animation:gb .38s steps(2) 1}
+@keyframes ga{0%{transform:translate(-4px,0)}50%{transform:translate(4px,-1px)}100%{transform:translate(0)}}
+@keyframes gb{0%{transform:translate(4px,0)}50%{transform:translate(-4px,1px)}100%{transform:translate(0)}}
+
+/* garis pemindai */
+.pindai{position:absolute;left:0;right:0;top:0;height:2px;z-index:-1;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(15,157,138,.7),transparent);box-shadow:0 0 14px rgba(15,157,138,.6);animation:pindai 6s linear infinite}
+@keyframes pindai{from{transform:translateY(-10px)}to{transform:translateY(520px)}}
+
+@media (prefers-reduced-motion:reduce){
+  .pindai,.glitch::before,.glitch::after,.terminal .kursor{animation:none!important}
+  .hero canvas.kode{display:none}
+}
   </style>
 </head>
 <body>
@@ -960,6 +988,60 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
     e.stopImmediatePropagation();
     pasang((indeks() + 1) % DAFTAR.length);
   }, true);
+})();
+</script>
+  <script>
+(function(){
+  var hero=document.querySelector('.hero');if(!hero)return;
+  var kurang=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 1. hujan kode
+  var c=document.createElement('canvas');c.className='kode';c.setAttribute('aria-hidden','true');hero.appendChild(c);
+  if(!kurang){
+    var x=c.getContext('2d'),w,h,y,sz=16,huruf='01{}<>/;=+*#$%ABCDEF'.split(''),last=0;
+    var gelap=matchMedia('(prefers-color-scheme: dark)').matches;
+    function ukur(){w=c.width=hero.clientWidth;h=c.height=hero.clientHeight;y=[];for(var i=0;i<Math.floor(w/sz);i++)y[i]=Math.random()*-30;}
+    ukur();addEventListener('resize',ukur);
+    (function gambar(t){
+      requestAnimationFrame(gambar);
+      if(t-last<70)return;last=t;
+      x.globalCompositeOperation='destination-out';x.fillStyle='rgba(0,0,0,.12)';x.fillRect(0,0,w,h);
+      x.globalCompositeOperation='source-over';x.fillStyle=gelap?'#6e97ff':'#1f5eff';x.font=sz+'px monospace';
+      for(var i=0;i<y.length;i++){
+        x.fillText(huruf[Math.floor(Math.random()*huruf.length)],i*sz,y[i]*sz);
+        if(y[i]*sz>h&&Math.random()>.975)y[i]=0;else y[i]++;
+      }
+    })(0);
+  }
+
+  // 2. terminal mengetik
+  var t=document.createElement('div');t.className='terminal';t.setAttribute('aria-hidden','true');
+  var o=document.createElement('span'),k=document.createElement('span');k.className='kursor';
+  t.appendChild(o);t.appendChild(k);
+  var lead=hero.querySelector('.lead');
+  if(lead)lead.insertAdjacentElement('afterend',t);else hero.appendChild(t);
+  var teks=['$ npm run kelas-a','> memuat anggota... selesai','> status: online'];
+  if(kurang){o.textContent=teks.join('\n');}
+  else{
+    var i=0,j=0,s='';
+    (function step(){
+      if(i>=teks.length)return;
+      if(j<teks[i].length){s+=teks[i][j++];o.textContent=s;setTimeout(step,i===0?60:25);}
+      else{i++;j=0;s+='\n';setTimeout(step,i===1?500:300);}
+    })();
+  }
+
+  // 3. glitch pada judul
+  var g=hero.querySelector('.h1-top');
+  if(g&&!kurang){
+    g.classList.add('glitch');g.setAttribute('data-text',g.textContent);
+    function cetak(){g.classList.remove('aktif');void g.offsetWidth;g.classList.add('aktif');setTimeout(function(){g.classList.remove('aktif');},400);}
+    (function ulang(){setTimeout(function(){cetak();ulang();},3500+Math.random()*3000);})();
+    g.addEventListener('mouseenter',cetak);
+  }
+
+  // 4. garis pemindai
+  if(!kurang){var p=document.createElement('div');p.className='pindai';p.setAttribute('aria-hidden','true');hero.appendChild(p);}
 })();
 </script>
 </html>
