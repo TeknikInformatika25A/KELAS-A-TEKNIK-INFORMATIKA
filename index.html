@@ -480,6 +480,23 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   * { transition: none !important; }
 }
 </style>
+  @keyframes melayang {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+#logo img {
+  animation: melayang 4s ease-in-out infinite;
+}
+
+/* logo kedua bergerak sedikit terlambat, jadi tidak kaku bersamaan */
+#logo li:nth-child(2) img {
+  animation-delay: -2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #logo img { animation: none; }
+}
 </head>
 <body>
 <header class="site-header">
