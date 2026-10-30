@@ -1030,4 +1030,34 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   if(!kurang){var p=document.createElement('div');p.className='pindai';p.setAttribute('aria-hidden','true');hero.appendChild(p);}
 })();
 </script>
+  <audio id="bgm" src="musik-kelas.mp3" loop preload="none"></audio>
+<button id="bgm-btn" aria-label="Putar musik" title="Putar/jeda musik">♪</button>
+
+<style>
+  #bgm-btn {
+    position: fixed; right: 16px; bottom: 16px; z-index: 999;
+    width: 48px; height: 48px; border-radius: 50%;
+    border: none; cursor: pointer; font-size: 22px;
+    background: #2563eb; color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  }
+  #bgm-btn.playing { background: #16a34a; }
+</style>
+
+<script>
+  const bgm = document.getElementById('bgm');
+  const btn = document.getElementById('bgm-btn');
+  btn.addEventListener('click', () => {
+    if (bgm.paused) {
+      bgm.volume = 0.5;
+      bgm.play();
+      btn.classList.add('playing');
+      btn.textContent = '❚❚';
+    } else {
+      bgm.pause();
+      btn.classList.remove('playing');
+      btn.textContent = '♪';
+    }
+  });
+</script>
 </html>
