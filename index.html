@@ -618,14 +618,7 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
         <p class="eyebrow">Galeri</p>
         <h2>Foto bersama Kelas A</h2>
       </div>
-      <ul class="gallery">
-        <li><a href="foto-kelas-1.jpg" target="_blank" rel="noopener"><img src="foto-kelas-1.jpg" alt="Mahasiswa Kelas A berfoto bersama dengan kemeja hitam di tangga depan gedung" loading="lazy"></a></li>
-        <li><a href="foto-kelas-2.jpg" target="_blank" rel="noopener"><img src="foto-kelas-2.jpg" alt="Foto bersama Kelas A dari sudut lain, dua mahasiswa duduk di tangga paling depan" loading="lazy"></a></li>
-                <li><a href="foto-kelas-3.jpg" target="_blank" rel="noopener"><img src="foto-kelas-3.jpg" alt="Mahasiswa Kelas A berfoto bersama di depan air terjun" loading="lazy"></a></li>
-        <li><a href="foto-kelas-4.jpg" target="_blank" rel="noopener"><img src="foto-kelas-4.jpg" alt="Kelas A berseragam hijau dan hitam duduk di lapangan rumput" loading="lazy"></a></li>
-        <li><a href="foto-kelas-5.jpg" target="_blank" rel="noopener"><img src="foto-kelas-5.jpg" alt="Kelas A berkumpul berpakaian hitam di sebuah kafe pada malam hari" loading="lazy"></a></li>
-        <li><a href="foto-kelas-6.jpg" target="_blank" rel="noopener"><img src="foto-kelas-6.jpg" alt="Kelas A berkemeja putih dan celana hitam di depan gedung kampus hijau" loading="lazy"></a></li>
-      </ul>
+      <div id="galeri-baru"></div>
       <p class="gallery-note">Ketuk foto untuk melihat ukuran penuh.</p>
     </div>
   </section>
@@ -932,7 +925,6 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   background-repeat: no-repeat;
 }
 </style>
-</body>
   <style>
 :root[data-theme="laut"] {
   --bg: #08203F; --surface: rgba(6, 24, 50, .78); --ink: #F2F8FF; --muted: #BCD6EE;
@@ -1031,33 +1023,96 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
 })();
 </script>
   <audio id="bgm" src="musik-kelas.mp3" loop preload="none"></audio>
-<button id="bgm-btn" aria-label="Putar musik" title="Putar/jeda musik">♪</button>
+<button id="bgm-btn" type="button" aria-label="Putar musik" aria-pressed="false" title="Putar/jeda musik">♪</button>
 
 <style>
-  #bgm-btn {
-    position: fixed; right: 16px; bottom: 16px; z-index: 999;
-    width: 48px; height: 48px; border-radius: 50%;
-    border: none; cursor: pointer; font-size: 22px;
-    background: #2563eb; color: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,.3);
-  }
-  #bgm-btn.playing { background: #16a34a; }
+#bgm-btn{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:999;
+  width:48px;height:48px;border-radius:50%;border:1px solid var(--line);cursor:pointer;font-size:20px;line-height:1;
+  background:var(--ink);color:var(--bg);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+#bgm-btn.playing{background:var(--mark);color:var(--mark-ink);border-color:var(--mark)}
 </style>
 
 <script>
-  const bgm = document.getElementById('bgm');
-  const btn = document.getElementById('bgm-btn');
-  btn.addEventListener('click', () => {
+(function () {
+  var bgm = document.getElementById('bgm');
+  var btn = document.getElementById('bgm-btn');
+  function tampil(main) {
+    btn.classList.toggle('playing', main);
+    btn.textContent = main ? '❚❚' : '♪';
+    btn.setAttribute('aria-pressed', main ? 'true' : 'false');
+    btn.setAttribute('aria-label', main ? 'Jeda musik' : 'Putar musik');
+  }
+  btn.addEventListener('click', function () {
     if (bgm.paused) {
       bgm.volume = 0.5;
-      bgm.play();
-      btn.classList.add('playing');
-      btn.textContent = '❚❚';
+      var p = bgm.play();
+      if (p && p.then) { p.then(function () { tampil(true); }, function () { tampil(false); }); }
+      else { tampil(true); }
     } else {
       bgm.pause();
-      btn.classList.remove('playing');
-      btn.textContent = '♪';
+      tampil(false);
     }
   });
+})();
 </script>
+
+<style>
+/* Galeri polaroid berserakan */
+#galeri-baru{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px;padding:16px 12px;overflow-x:clip}
+@media (min-width:720px){#galeri-baru{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 28px}}
+#galeri-baru .pol{display:block;background:#fff;padding:8px 8px 34px;box-shadow:0 6px 16px rgba(0,0,0,.3);position:relative;text-decoration:none;
+  opacity:0;transform:translate(var(--x),-60px) rotate(var(--r0)) scale(.8);
+  transition:transform .8s cubic-bezier(.2,.9,.3,1.2),opacity .5s ease}
+#galeri-baru .pol.tampil{opacity:1;transform:rotate(var(--r))}
+#galeri-baru .pol.tampil:hover,#galeri-baru .pol.tampil:focus-visible{transform:rotate(0) scale(1.06);z-index:5;transition-duration:.25s}
+#galeri-baru .pol img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 72%}
+#galeri-baru .pol span{position:absolute;left:0;right:0;bottom:9px;text-align:center;font:600 13px/1 var(--mono);color:#333}
+@media (prefers-reduced-motion:reduce){#galeri-baru .pol{opacity:1;transform:rotate(var(--r));transition:none}}
+</style>
+
+<script>
+(function () {
+  var host = document.getElementById("galeri-baru");
+  if (!host) return;
+  var foto = [
+    ["foto-kelas-1.jpg", "Mahasiswa Kelas A berfoto bersama dengan kemeja hitam di tangga depan gedung"],
+    ["foto-kelas-2.jpg", "Foto bersama Kelas A dari sudut lain, dua mahasiswa duduk di tangga paling depan"],
+    ["foto-kelas-3.jpg", "Mahasiswa Kelas A berfoto bersama di depan air terjun"],
+    ["foto-kelas-4.jpg", "Kelas A berseragam hijau dan hitam duduk di lapangan rumput"],
+    ["foto-kelas-5.jpg", "Kelas A berkumpul berpakaian hitam di sebuah kafe pada malam hari"],
+    ["foto-kelas-6.jpg", "Kelas A berkemeja putih dan celana hitam di depan gedung kampus hijau"]
+  ];
+  foto.forEach(function (f, i) {
+    var a = document.createElement("a");
+    a.className = "pol";
+    a.href = f[0]; a.target = "_blank"; a.rel = "noopener";
+    var r = (i * 37) % 11 - 5;
+    a.style.setProperty("--r", r + "deg");
+    a.style.setProperty("--r0", (r * 4) + "deg");
+    a.style.setProperty("--x", (i % 2 ? 30 : -30) + "px");
+    var im = new Image();
+    im.src = f[0]; im.alt = f[1]; im.loading = "lazy";
+    var c = document.createElement("span");
+    c.textContent = "Kelas A · " + (i + 1);
+    a.appendChild(im); a.appendChild(c); host.appendChild(a);
+  });
+  var els = host.querySelectorAll(".pol");
+  var kurang = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (kurang || !("IntersectionObserver" in window)) {
+    els.forEach(function (e) { e.classList.add("tampil"); });
+    return;
+  }
+  var io = new IntersectionObserver(function (es) {
+    var n = 0;
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      setTimeout(function () { el.classList.add("tampil"); }, n * 150);
+      n++; io.unobserve(el);
+    });
+  }, { threshold: 0.2 });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
+</body>
 </html>
