@@ -1026,7 +1026,8 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   if(!kurang){var p=document.createElement('div');p.className='pindai';p.setAttribute('aria-hidden','true');hero.appendChild(p);}
 })();
 </script>
-  <audio id="bgm" src="musik-kelas.mp3" loop preload="none"></audio>
+  <audio id="bgm" src="musik-kelas.mp3" preload="none"></audio>
+<button id="bgm-next" type="button" aria-label="Lagu berikutnya" title="Lagu berikutnya">⏭</button>
 <button id="bgm-btn" type="button" aria-label="Putar musik" aria-pressed="false" title="Putar/jeda musik">♪</button>
 
 <style>
@@ -1034,12 +1035,28 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   width:48px;height:48px;border-radius:50%;border:1px solid var(--line);cursor:pointer;font-size:20px;line-height:1;
   background:var(--ink);color:var(--bg);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 #bgm-btn.playing{background:var(--mark);color:var(--mark-ink);border-color:var(--mark)}
+#bgm-next{position:fixed;right:calc(max(16px,env(safe-area-inset-right,0px)) + 56px);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:999;
+  width:48px;height:48px;border-radius:50%;border:1px solid var(--line);cursor:pointer;font-size:18px;line-height:1;
+  background:var(--ink);color:var(--bg);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 </style>
 
 <script>
 (function () {
   var bgm = document.getElementById('bgm');
   var btn = document.getElementById('bgm-btn');
+  var next = document.getElementById('bgm-next');
+  var LAGU = ['musik-kelas.mp3', 'musik-kelas-2.mp3'];
+  var urut = 0;
+  function ganti() {
+    urut = (urut + 1) % LAGU.length;
+    bgm.src = LAGU[urut];
+    bgm.volume = 0.5;
+    var p = bgm.play();
+    if (p && p.then) { p.then(function () { tampil(true); }, function () { tampil(false); }); }
+    else { tampil(true); }
+  }
+  next.addEventListener('click', ganti);
+  bgm.addEventListener('ended', ganti);
   function tampil(main) {
     btn.classList.toggle('playing', main);
     btn.textContent = main ? '❚❚' : '♪';
