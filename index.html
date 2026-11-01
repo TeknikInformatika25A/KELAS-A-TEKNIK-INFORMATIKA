@@ -436,6 +436,8 @@ input:hover { border-color: var(--muted); }
   border-radius: 2px;
 }
 .avatar.me { background: var(--mark); color: var(--mark-ink); }
+.avatar { overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .who { min-width: 0; }
 .who strong { display: block; font-weight: 600; overflow-wrap: anywhere; }
 .who span { font: 400 13px var(--mono); color: var(--muted); }
@@ -808,7 +810,7 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   }
 
   function semua() {
-    var hasil = TETAP.map(function (a) { return { nama: a.nama, peran: a.peran, tetap: true }; })
+    var hasil = TETAP.map(function (a) { return { nama: a.nama, peran: a.peran, foto: a.foto, tetap: true }; })
       .concat(tambahan.map(function (a, i) { return { nama: a.nama, idx: i, tetap: false }; }));
     hasil.forEach(function (a, i) { a.no = i + 1; });
     return hasil;
@@ -839,6 +841,15 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
       var av = document.createElement("div");
       av.className = "avatar" + (a.peran === "Pembuat halaman" ? " me" : "");
       av.textContent = inisial(a.nama);
+      if (a.foto) {
+        var im = document.createElement("img");
+        im.src = a.foto;
+        im.alt = "Foto " + a.nama;
+        im.loading = "lazy";
+        im.addEventListener("error", function () { av.textContent = inisial(a.nama); });
+        av.textContent = "";
+        av.appendChild(im);
+      }
       var who = document.createElement("div");
       who.className = "who";
       var strong = document.createElement("strong");
