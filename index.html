@@ -10,7 +10,7 @@
 <meta property="og:title" content="Kelas A Teknik Informatika">
 <meta property="og:description" content="Halaman Kelas A S1 Teknik Informatika Universitas Perjuangan Tasikmalaya: logo, foto bersama, pengurus, mata kuliah, dan daftar anggota.">
 <meta property="og:image" content="logo-kelas-a.jpg">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Black+Ops+One&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Graduate&display=swap">
 <style>
 :root { color-scheme: light; padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); }
 body { margin: 0; }
@@ -170,7 +170,8 @@ h1 {
 }
 .h1-top {
   display: block;
-  font-family: "Black Ops One", var(--display);
+  font-family: "Graduate", var(--display);
+  filter: url(#grunge);
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: .01em;
@@ -821,7 +822,7 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
 </script>
 <style>
 #motto.motto{margin:24px 0 0;display:flex;flex-direction:column;gap:4px;text-transform:uppercase;font-family:var(--display);line-height:1.1;letter-spacing:.01em;text-align:left}
-.motto .motto-1,.motto .motto-2{font-family:"Black Ops One",var(--display);font-weight:400;font-size:clamp(1.1rem,5vw,1.9rem);line-height:1.15;letter-spacing:.01em;color:var(--ink);background:none;padding:0;margin:0}
+.motto .motto-1,.motto .motto-2{font-family:"Graduate",var(--display);font-weight:400;font-size:clamp(1.1rem,5vw,1.9rem);line-height:1.15;letter-spacing:.01em;color:var(--ink);background:none;padding:0;margin:0}
 </style>
 <style>
 /* Navigasi: di HP menu pindah ke baris kedua, bisa digeser, ada petunjuk tepi dan penanda bagian aktif */
@@ -1307,5 +1308,12 @@ section[id], main[id] { scroll-margin-top: var(--hdr, 64px); }
   els.forEach(function (e) { io.observe(e); });
 })();
 </script>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="grunge" x="-2%" y="-5%" width="104%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="7" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -12 0 0 0 8.8" result="holes"/>
+    <feComposite in="SourceGraphic" in2="holes" operator="in"/>
+  </filter>
+</svg>
 </body>
 </html>
