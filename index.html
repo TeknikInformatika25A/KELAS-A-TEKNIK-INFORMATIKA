@@ -592,7 +592,6 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
       <a href="#galeri">Galeri</a>
       <a href="#tentang">Tentang</a>
       <a href="#angkatan">Ketua Angkatan</a>
-      <a href="#pengurus">Pengurus</a>
       <a href="#kuliah">Mata Kuliah</a>
       <a href="#anggota">Anggota</a>
     </nav>
@@ -683,6 +682,15 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
         <div><dt>Dosen wali</dt><dd>Cepi Rahmat Hidayat</dd></div>
         <div><dt>Pembuat halaman</dt><dd>Muhamad Frian Erliana</dd></div>
       </dl>
+      <div class="sub-pengurus" id="pengurus">
+        <h3>Pengurus Kelas</h3>
+        <ul class="officers">
+          <li><p class="jabatan">Ketua Kelas</p><p class="person">Fabian Taufiqurrahman</p></li>
+          <li><p class="jabatan">Wakil Ketua</p><p class="person">Elvan Ghilman Aminudien</p></li>
+          <li><p class="jabatan">Bendahara</p><p class="person">Sri Agnia</p></li>
+          <li><p class="jabatan">Sekretaris</p><p class="person">Reva Salwa Adhya</p></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -696,21 +704,6 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
         <p class="jabatan">Teknik Informatika 25</p>
         <p class="person">Rizkan Anwar Fauzi</p>
       </div>
-    </div>
-  </section>
-
-  <section id="pengurus">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">Pengurus</p>
-        <h2>Pengurus Kelas</h2>
-      </div>
-      <ul class="officers">
-        <li><p class="jabatan">Ketua Kelas</p><p class="person">Fabian Taufiqurrahman</p></li>
-        <li><p class="jabatan">Wakil Ketua</p><p class="person">Elvan Ghilman Aminudien</p></li>
-        <li><p class="jabatan">Bendahara</p><p class="person">Sri Agnia</p></li>
-        <li><p class="jabatan">Sekretaris</p><p class="person">Reva Salwa Adhya</p></li>
-      </ul>
     </div>
   </section>
 
@@ -885,6 +878,10 @@ section[id], main[id] { scroll-margin-top: var(--hdr, 64px); }
   setTimeout(function () { ukurHeader(); tepi(); }, 600);   // setelah font dimuat
 })();
 </script>
+<style>
+.sub-pengurus { margin-top: 40px; scroll-margin-top: var(--hdr, 64px); }
+.sub-pengurus h3 { margin: 0 0 18px; font: 800 clamp(1.25rem, 4.5vw, 1.6rem)/1.15 var(--display); }
+</style>
 <footer>
   <div class="wrap">
     <span>Kelas A Teknik Informatika · Universitas Perjuangan Tasikmalaya</span>
