@@ -171,10 +171,13 @@ h1 {
 .h1-top { display: block; font-size: clamp(3.6rem, 15vw, 7.5rem); }
 .h1-sub { display: block; font-size: clamp(1.7rem, 6vw, 2.9rem); font-weight: 700; margin-top: 10px; letter-spacing: -.02em; }
 .mark {
-  background: var(--mark);
-  color: var(--mark-ink);
-  padding: 0 .1em;
-  border-radius: 2px;
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+.h1-sub {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 .lead {
   max-width: 34em;
