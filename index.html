@@ -618,6 +618,18 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
     </div>
   </div>
 
+  <section id="kutipan" aria-label="Kata-kata Teknik Informatika">
+    <div class="wrap">
+      <figure class="kutip">
+        <blockquote id="kutipTeks">Setiap error adalah guru yang paling jujur. Baca pesannya, lalu perbaiki.</blockquote>
+        <figcaption>
+          <span class="mono">// kata-kata TI</span>
+          <button type="button" id="kutipLain" class="kutip-btn">Kutipan lain</button>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section id="logo">
     <div class="wrap">
       <div class="sec-head">
@@ -768,6 +780,44 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   </section>
 </main>
 
+<style>
+#kutipan{padding:8px 0 4px}
+#kutipan .kutip{margin:0;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--mark);padding:18px 18px 12px}
+#kutipan blockquote{margin:0 0 12px;font:700 clamp(1.05rem,3.4vw,1.35rem)/1.45 var(--display);color:var(--ink);transition:opacity .25s}
+#kutipan blockquote.ganti{opacity:0}
+#kutipan figcaption{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font:500 12px/1.4 var(--mono)}
+#kutipan .kutip-btn{font:500 12px/1 var(--mono);color:var(--ink);background:transparent;border:1px solid var(--line);padding:8px 12px;cursor:pointer}
+#kutipan .kutip-btn:hover{border-color:var(--ink)}
+@media (prefers-reduced-motion:reduce){#kutipan blockquote{transition:none}}
+</style>
+<script>
+(function () {
+  var el = document.getElementById("kutipTeks"), btn = document.getElementById("kutipLain");
+  if (!el) return;
+  var k = [
+    "Setiap error adalah guru yang paling jujur. Baca pesannya, lalu perbaiki.",
+    "Kode yang rapi lahir dari kepala yang sabar.",
+    "Tidak ada yang langsung jago. Semua programmer pernah bingung dengan satu titik koma.",
+    "Hari ini compile gagal, besok lancar. Yang penting tidak berhenti mengetik.",
+    "Satu program besar dibangun dari banyak baris kecil, satu kelas hebat dari banyak teman yang saling bantu.",
+    "Di Kelas A, tidak ada yang ngoding sendirian. Kalau macet, kami debug bareng.",
+    "Beda laptop, beda bahasa pemrograman, tapi satu tujuan: lulus bareng.",
+    "Katanya kuliah TI itu mudah, sampai bertemu tugas yang deadline-nya malam ini.",
+    "Di komputer saya jalan, di komputer kamu error. Itulah hidup.",
+    "Kopi, Wi-Fi, dan semangat adalah tiga dependensi wajib mahasiswa TI.",
+    "Kelas A: Satu Kelas, Seribu Baris Kode.",
+    "Dari Hello World menuju Dunia."
+  ];
+  var cur = Math.floor(Math.random() * k.length);
+  el.textContent = k[cur];
+  btn.addEventListener("click", function () {
+    var n; do { n = Math.floor(Math.random() * k.length); } while (n === cur);
+    cur = n;
+    el.classList.add("ganti");
+    setTimeout(function () { el.textContent = k[n]; el.classList.remove("ganti"); }, 200);
+  });
+})();
+</script>
 <footer>
   <div class="wrap">
     <span>Kelas A Teknik Informatika · Universitas Perjuangan Tasikmalaya</span>
