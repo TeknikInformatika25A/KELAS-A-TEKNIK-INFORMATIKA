@@ -834,6 +834,60 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
 #motto .motto-2{font-weight:800;font-size:clamp(2rem,9.5vw,3.6rem);color:var(--ink)}
 #motto .motto-2:last-child{display:inline-block;align-self:flex-start;background:var(--mark);color:var(--mark-ink);padding:0 .14em;margin-top:2px}
 </style>
+<style>
+/* Navigasi: di HP menu pindah ke baris kedua, bisa digeser, ada petunjuk tepi dan penanda bagian aktif */
+section[id], main[id] { scroll-margin-top: var(--hdr, 64px); }
+.nav a { position: relative; }
+.nav a.aktif { color: var(--ink); background: var(--surface); }
+.nav a.aktif::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 1px; height: 2px; background: var(--mark); }
+@media (max-width: 720px) {
+  .site-header .wrap { flex-wrap: wrap; row-gap: 4px; padding-block: 8px 4px; }
+  .brand { order: 1; margin-right: auto; }
+  .theme-btn { order: 2; }
+  .nav { order: 3; flex: 1 1 100%; margin-inline: -6px; padding-bottom: 4px; -webkit-overflow-scrolling: touch;
+         scroll-snap-type: x proximity; }
+  .nav a { scroll-snap-align: center; padding: 8px 12px; }
+  .nav.fade-kanan { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent);
+                    mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent); }
+  .nav.fade-kiri { -webkit-mask-image: linear-gradient(90deg, transparent, #000 32px);
+                   mask-image: linear-gradient(90deg, transparent, #000 32px); }
+  .nav.fade-kiri.fade-kanan { -webkit-mask-image: linear-gradient(90deg, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+                              mask-image: linear-gradient(90deg, transparent, #000 32px, #000 calc(100% - 32px), transparent); }
+}
+</style>
+<script>
+(function () {
+  var header = document.querySelector(".site-header"), nav = document.querySelector(".nav");
+  if (!header || !nav) return;
+  var links = [].slice.call(nav.querySelectorAll("a"));
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+
+  function ukurHeader() { document.documentElement.style.setProperty("--hdr", (header.offsetHeight + 8) + "px"); }
+  function tepi() {
+    var maks = nav.scrollWidth - nav.clientWidth;
+    nav.classList.toggle("fade-kiri", nav.scrollLeft > 4);
+    nav.classList.toggle("fade-kanan", maks > 4 && nav.scrollLeft < maks - 4);
+  }
+  var terakhir = -1;
+  function aktif() {
+    var batas = header.offsetHeight + 24, idx = -1;
+    for (var i = 0; i < secs.length; i++) { if (secs[i] && secs[i].getBoundingClientRect().top <= batas) idx = i; }
+    if (idx === terakhir) return;
+    terakhir = idx;
+    links.forEach(function (a, i) { a.classList.toggle("aktif", i === idx); if (i === idx) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+    if (idx >= 0) {
+      var a = links[idx], kiri = a.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2;
+      nav.scrollTo({ left: kiri, behavior: "smooth" });
+    }
+  }
+  var tunggu = false;
+  addEventListener("scroll", function () { if (tunggu) return; tunggu = true; requestAnimationFrame(function () { aktif(); tunggu = false; }); }, { passive: true });
+  nav.addEventListener("scroll", tepi, { passive: true });
+  addEventListener("resize", function () { ukurHeader(); tepi(); });
+  ukurHeader(); tepi(); aktif();
+  setTimeout(function () { ukurHeader(); tepi(); }, 600);   // setelah font dimuat
+})();
+</script>
 <footer>
   <div class="wrap">
     <span>Kelas A Teknik Informatika · Universitas Perjuangan Tasikmalaya</span>
