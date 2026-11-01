@@ -666,6 +666,79 @@ footer .wrap { gap:10px; }
 }
 </style>
 
+
+<style id="futuristic-tech-upgrade">
+/* FUTURISTIC TECH — visual layer; existing content and features remain intact */
+:root{--bg:#050d20;--surface:#0b1b38;--ink:#edf6ff;--muted:#9bb3d2;--line:#1b3d6b;--accent:#168cff;--mark:#23c9ff;--mark-ink:#06152c;color-scheme:dark}
+:root[data-theme="light"]{--bg:#f3f8ff;--surface:#fff;--ink:#102647;--muted:#5d7595;--line:#d5e4f7;--accent:#1769e8;--mark:#d9f3ff;--mark-ink:#12356b;color-scheme:light}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3f8ff;--surface:#fff;--ink:#102647;--muted:#5d7595;--line:#d5e4f7;--accent:#1769e8;--mark:#d9f3ff;--mark-ink:#12356b;color-scheme:light}}
+html{scroll-padding-top:88px}
+body{background:radial-gradient(ellipse at 80% -10%,rgba(0,125,255,.2),transparent 34rem),radial-gradient(ellipse at 0 45%,rgba(0,208,255,.07),transparent 30rem),var(--bg)}
+.site-header{background:rgba(4,13,31,.88);border-bottom:1px solid rgba(42,137,255,.34);box-shadow:0 10px 40px rgba(0,0,0,.18);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.site-header .wrap{min-height:76px}
+.brand{font:800 15px/1.1 var(--display);letter-spacing:-.03em;color:#f4f9ff}
+.brand i{width:38px;height:38px;line-height:38px;border-radius:12px;background:linear-gradient(145deg,#47e3ff,#1767ff);color:#06152c;box-shadow:0 0 24px rgba(23,145,255,.38)}
+.nav a{border:1px solid transparent;border-radius:999px;transition:background .22s,border-color .22s,color .22s}
+.nav a:hover,.nav a.aktif{background:rgba(18,133,255,.18);border-color:rgba(58,165,255,.25);color:#fff}
+.theme-btn{border-radius:999px;background:rgba(16,44,82,.8);border-color:#28558c;color:#e9f5ff;padding:10px 15px}
+.hero{position:relative;isolation:isolate;overflow:hidden;padding-block:clamp(62px,9vw,108px);border-radius:0 0 34px 34px;background:linear-gradient(112deg,#030b1c 0%,#082454 52%,#0755a0 100%);box-shadow:0 28px 80px rgba(0,0,0,.26)}
+.hero::before{inset:0;background:radial-gradient(circle at 78% 28%,rgba(23,160,255,.42),transparent 24rem),radial-gradient(circle at 12% 95%,rgba(0,218,255,.15),transparent 27rem),linear-gradient(130deg,transparent 58%,rgba(50,160,255,.12) 58.2%,transparent 58.8%);animation:heroPulse 12s ease-in-out infinite alternate}
+.hero::after{content:"{ }";position:absolute;z-index:-1;right:7%;top:48%;transform:translateY(-50%) rotate(-9deg);font:800 clamp(7rem,20vw,15rem)/1 var(--mono);letter-spacing:-.15em;color:rgba(151,211,255,.09);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;grid-template-columns:minmax(0,1.05fr) minmax(260px,.85fr);gap:clamp(28px,5vw,70px)}
+.hero .eyebrow{color:#8edaff}
+.hero .lead{color:#c6ddf8;max-width:34em}
+.hero .judul-img{background:linear-gradient(90deg,#f5fbff,#55dcff);filter:drop-shadow(0 0 22px rgba(24,174,255,.32))}
+.hero .motto{color:#e9f5ff}
+.future-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:27px}
+.future-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 19px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;transition:transform .22s,box-shadow .22s,border-color .22s}
+.future-btn:hover{transform:translateY(-3px)}
+.future-btn.primary{color:#fff;background:linear-gradient(100deg,#0877ef,#13c4e9);box-shadow:0 8px 28px rgba(0,143,255,.35)}
+.future-btn.secondary{color:#e5f3ff;border:1px solid rgba(133,195,255,.5);background:rgba(8,29,61,.45)}
+.future-visual{position:relative;min-height:300px;display:grid;place-items:center;perspective:900px}
+.future-orbit{position:absolute;width:min(88%,350px);aspect-ratio:1;border:1px solid rgba(91,190,255,.3);border-radius:50%;box-shadow:0 0 0 24px rgba(65,164,255,.045),0 0 0 52px rgba(65,164,255,.03),inset 0 0 50px rgba(24,145,255,.08);animation:orbit 24s linear infinite}
+.future-orbit:before,.future-orbit:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:#40dfff;box-shadow:0 0 20px #20bfff}
+.future-orbit:before{top:12%;left:18%}.future-orbit:after{bottom:13%;right:12%;background:#287dff}
+.future-console{position:relative;width:min(100%,390px);padding:22px;border:1px solid rgba(91,178,255,.48);border-radius:22px;background:linear-gradient(145deg,rgba(12,37,77,.9),rgba(5,17,40,.86));box-shadow:0 25px 65px rgba(0,0,0,.32),0 0 45px rgba(0,128,255,.18);backdrop-filter:blur(16px);transform:rotateY(-7deg) rotateX(3deg);animation:consoleFloat 6s ease-in-out infinite}
+.console-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:15px;border-bottom:1px solid rgba(118,180,255,.2);font:11px var(--mono);letter-spacing:.12em;color:#9bcaff}
+.console-dots{display:flex;gap:5px}.console-dots i{width:7px;height:7px;border-radius:50%;background:#32d6ff}
+.console-title{font:800 23px/1.15 var(--display);margin:19px 0 8px;color:#f4faff}
+.console-sub{font:12px var(--mono);color:#8eb8e8}
+.console-code{margin:20px 0 0;padding:15px;border-radius:12px;background:rgba(1,9,23,.58);font:12px/1.9 var(--mono);color:#8ff5d0}
+.console-code b{color:#4dd9ff;font-weight:500}.console-code em{color:#ffd76e;font-style:normal}
+.console-foot{display:flex;justify-content:space-between;gap:12px;margin-top:16px;font:10px var(--mono);color:#8caed4}
+.quick-access{display:none!important}
+.tech-dashboard{padding-top:48px}
+.dash-heading{align-items:center}
+.dash-kicker{color:#45caff}
+.dash-status{border-color:rgba(35,214,155,.35);background:rgba(35,214,155,.07)}
+.dash-card{position:relative;overflow:hidden;min-height:116px;border-radius:18px;background:linear-gradient(145deg,rgba(15,42,82,.94),rgba(7,22,48,.94));border-color:rgba(75,151,235,.3);box-shadow:0 12px 32px rgba(0,0,0,.16)}
+.dash-card:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 25%,rgba(72,177,255,.09),transparent 75%);transform:translateX(-110%);transition:transform .65s}
+.dash-card:hover:before{transform:translateX(110%)}
+.dash-card:hover{transform:translateY(-6px);border-color:#25bfff;box-shadow:0 18px 38px rgba(0,104,255,.18)}
+.dash-icon{border:1px solid rgba(63,176,255,.22);background:rgba(22,139,255,.15);color:#55d7ff}
+section{scroll-margin-top:90px}
+.sec-head .eyebrow{color:#40caff}
+#kutipan .kutip,.course,.day,.officers li,.chair,.logos li,.figure,.add-form{border-color:var(--line);background:var(--surface);box-shadow:0 14px 38px rgba(0,0,0,.1)}
+.course,.day,.officers li,.chair,.logos li{transition:transform .24s,border-color .24s,box-shadow .24s}
+.course:hover,.day:hover,.officers li:hover,.logos li:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 18px 40px rgba(0,120,255,.13)}
+.btn{background:linear-gradient(100deg,#0877ef,#13bde6);border-color:transparent}
+footer{background:#030b19;border-color:#173963}
+.scroll-progress{position:fixed;z-index:20;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,#168cff,#36e4ff);box-shadow:0 0 12px #168cff;pointer-events:none}
+.reveal-ready .reveal-on-scroll{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
+.reveal-ready .reveal-on-scroll.is-visible{opacity:1;transform:translateY(0)}
+@keyframes orbit{to{transform:rotate(360deg)}}@keyframes consoleFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}@keyframes heroPulse{from{opacity:.7}to{opacity:1}}
+@media(max-width:760px){.hero .wrap{grid-template-columns:1fr;gap:28px}.future-visual{min-height:245px}.future-console{max-width:370px}.hero::after{right:-6%;top:65%;font-size:7rem}.site-header .wrap{flex-wrap:wrap}.nav{order:3;flex-basis:100%;padding-bottom:4px}.theme-btn{margin-left:auto}}
+@media(max-width:520px){.hero{border-radius:0 0 24px 24px}.future-visual{min-height:225px}.future-console{padding:17px}.console-title{font-size:20px}.dash-grid{grid-template-columns:1fr}.dash-card{min-height:94px}.future-btn{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.hero::before,.future-orbit,.future-console{animation:none!important}.reveal-ready .reveal-on-scroll{opacity:1;transform:none;transition:none}.future-btn,.dash-card,.course,.day,.officers li,.logos li{transition:none}.future-btn:hover,.dash-card:hover,.course:hover,.day:hover,.officers li:hover,.logos li:hover{transform:none}}
+:root[data-theme="light"] .site-header{background:rgba(244,249,255,.9)}
+:root[data-theme="light"] .brand{color:#102647}
+:root[data-theme="light"] .theme-btn{background:#fff;color:#102647}
+:root[data-theme="light"] .dash-card{background:linear-gradient(145deg,#fff,#eaf4ff)}
+:root[data-theme="light"] .dash-card strong{color:#102647}
+:root[data-theme="light"] .future-console{background:linear-gradient(145deg,rgba(16,52,101,.96),rgba(5,25,57,.96))}
+:root[data-theme="light"] footer{background:#06132c}
+</style>
+
 </head>
 <body>
 <header class="site-header">
@@ -698,6 +771,10 @@ footer .wrap { gap:10px; }
         </p>
         <p class="eyebrow hero-ket">S1 Teknik Informatika Angkatan 2025 · Universitas Perjuangan Tasikmalaya</p>
         <p class="lead hero-lead">Halaman bersama mahasiswa Kelas A.</p>
+        <div class="future-actions">
+          <a class="future-btn primary" href="#dashboard"><span>↗</span> Jelajahi portal</a>
+          <a class="future-btn secondary" href="#tentang"><span>◉</span> Profil kelas</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1642,6 +1719,38 @@ footer{background:#050f22;color:#b8cbe7;border-color:#1b3b67}
 @media(max-width:560px){.dash-heading{align-items:start;flex-direction:column}.dash-status{align-self:flex-start}.dash-grid{grid-template-columns:1fr}.dash-card{padding:15px}.dash-bottom{font-size:9px;flex-direction:column}.hero::after{right:-5%;opacity:.6}.site-header .wrap{gap:8px}}
 @media(prefers-reduced-motion:reduce){.dash-card{transition:none}.dash-card:hover{transform:none}}
 </style>
+
+
+<div class="scroll-progress" aria-hidden="true"></div>
+<script id="futuristic-tech-interactions">
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hero=document.querySelector('.hero .wrap');
+  if(hero&&!hero.querySelector('.future-visual')){
+    var visual=document.createElement('div');
+    visual.className='future-visual';
+    visual.setAttribute('aria-label','Panel visual teknologi Kelas A');
+    visual.innerHTML='<div class="future-orbit" aria-hidden="true"></div><div class="future-console"><div class="console-top"><span>TI / CLASS A</span><span class="console-dots"><i></i><i></i><i></i></span></div><div class="console-title">Digital minds.<br>One community.</div><div class="console-sub">S1 TEKNIK INFORMATIKA · 2025</div><div class="console-code"><b>const</b> kelas = <em>"Kelas A"</em>;<br><b>kelas.build</b>(masaDepan);<br><b>kelas.connect</b>(kolaborasi);<br><span style="color:#8ff5d0">// Satu Frekuensi, Satu Resonansi</span></div><div class="console-foot"><span>STATUS: LEARNING</span><span>● CONNECTED</span></div></div>';
+    hero.appendChild(visual);
+  }
+  var bar=document.querySelector('.scroll-progress');
+  function progress(){if(!bar)return;var max=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=(max>0?window.scrollY/max*100:0)+'%'}
+  window.addEventListener('scroll',progress,{passive:true});progress();
+  var targets=document.querySelectorAll('.tech-dashboard,.tech-dashboard .dash-card,main section,.quick-intro');
+  targets.forEach(function(el){el.classList.add('reveal-on-scroll')});
+  if(!reduce&&'IntersectionObserver'in window){
+    document.documentElement.classList.add('reveal-ready');
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('is-visible');io.unobserve(entry.target)}})},{threshold:.12});
+    targets.forEach(function(el){io.observe(el)});
+  }else{targets.forEach(function(el){el.classList.add('is-visible')})}
+  var links=document.querySelectorAll('.nav a');
+  if('IntersectionObserver'in window){
+    var sections=Array.from(links).map(function(a){return document.querySelector(a.getAttribute('href'))}).filter(Boolean);
+    var navIO=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('aktif',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-25% 0px -65% 0px'});
+    sections.forEach(function(sec){navIO.observe(sec)});
+  }
+})();
+</script>
 
 </body>
 </html>
