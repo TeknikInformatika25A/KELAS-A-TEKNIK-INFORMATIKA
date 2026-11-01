@@ -731,42 +731,59 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
       <div class="sec-head">
         <p class="eyebrow">Mata kuliah</p>
         <h2>Mata kuliah Kelas A</h2>
-        <p>Daftar mata kuliah yang berjalan, dikelompokkan per hari.</p>
+        <p>Daftar mata kuliah yang berjalan, dikelompokkan per hari. Buka bagian “Makna &amp; manfaat” untuk memahami hal yang dipelajari dan kegunaannya.</p>
       </div>
       <div class="days">
         <div class="day">
           <h3>Senin</h3>
           <ul>
-            <li>Pemrograman Web</li>
-            <li>Matematika Diskrit</li>
-            <li>Praktikum Pemrograman Web</li>
-            <li>Sistem Operasi</li>
+            <li class="course-info"><strong>Pemrograman Web</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Mempelajari cara membangun situs dan aplikasi yang berjalan melalui web, mulai dari struktur halaman, tampilan, hingga logika interaktif.</p><p><b>Manfaat:</b> Membekali mahasiswa untuk membuat website responsif, memahami teknologi web, dan mengembangkan layanan digital.</p></details></li>
+            <li class="course-info"><strong>Matematika Diskrit</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Mempelajari konsep matematika yang menjadi dasar ilmu komputer, seperti logika, himpunan, relasi, fungsi, kombinatorika, dan graf.</p><p><b>Manfaat:</b> Melatih penalaran sistematis serta membantu memahami algoritma, struktur data, basis data, dan jaringan komputer.</p></details></li>
+            <li class="course-info"><strong>Praktikum Pemrograman Web</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Kegiatan praktik untuk menerapkan konsep pemrograman web melalui latihan membuat dan menguji halaman atau fitur website.</p><p><b>Manfaat:</b> Mengasah keterampilan menulis kode, menghubungkan tampilan dengan fungsi, melakukan debugging, dan membangun proyek web sederhana.</p></details></li>
+            <li class="course-info"><strong>Sistem Operasi</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Mempelajari perangkat lunak inti yang mengelola sumber daya komputer serta menjadi penghubung antara perangkat keras, aplikasi, dan pengguna.</p><p><b>Manfaat:</b> Memahami proses, memori, berkas, perangkat, dan pengelolaan sistem sehingga lebih siap menggunakan maupun mengelola komputer.</p></details></li>
           </ul>
         </div>
         <div class="day">
           <h3>Selasa</h3>
           <ul>
-            <li>Kecerdasan Buatan</li>
-            <li>Statistika</li>
+            <li class="course-info"><strong>Kecerdasan Buatan</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Mempelajari cara merancang sistem komputer yang dapat melakukan tugas yang biasanya membutuhkan kemampuan cerdas, seperti mengenali pola, belajar, dan mengambil keputusan.</p><p><b>Manfaat:</b> Mengenal dasar machine learning dan penerapan AI untuk membantu menyelesaikan masalah di berbagai bidang.</p></details></li>
+            <li class="course-info"><strong>Statistika</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Mempelajari cara mengumpulkan, menyajikan, menganalisis, dan menafsirkan data agar menghasilkan informasi yang bermakna.</p><p><b>Manfaat:</b> Membantu membaca pola data, memahami ketidakpastian, melakukan pengujian, dan mengambil keputusan berdasarkan bukti.</p></details></li>
           </ul>
         </div>
         <div class="day">
           <h3>Kamis</h3>
           <ul>
-            <li>Praktikum Basis Data</li>
-            <li>Basis Data</li>
-            <li>Rekayasa Perangkat Lunak</li>
+            <li class="course-info"><strong>Praktikum Basis Data</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Latihan langsung merancang, membuat, mengisi, dan mengelola basis data menggunakan perangkat pengelola basis data.</p><p><b>Manfaat:</b> Melatih penggunaan SQL, pembuatan tabel, relasi, query, serta pengelolaan data untuk aplikasi.</p></details></li>
+            <li class="course-info"><strong>Basis Data</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Mempelajari cara menyimpan dan mengatur data secara terstruktur agar mudah dicari, diperbarui, dijaga konsistensinya, dan digunakan bersama.</p><p><b>Manfaat:</b> Menjadi dasar pengembangan sistem informasi, aplikasi, transaksi digital, dan pengelolaan data dalam organisasi.</p></details></li>
+            <li class="course-info"><strong>Rekayasa Perangkat Lunak</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Mempelajari pendekatan terencana untuk menganalisis kebutuhan, merancang, membangun, menguji, dan memelihara perangkat lunak.</p><p><b>Manfaat:</b> Membantu menghasilkan aplikasi yang sesuai kebutuhan, berkualitas, mudah dirawat, dan dikerjakan secara terstruktur dalam tim.</p></details></li>
           </ul>
         </div>
         <div class="day">
           <h3>Sabtu</h3>
           <ul>
-            <li>Aljabar Linear dan Matriks</li>
+            <li class="course-info"><strong>Aljabar Linear dan Matriks</strong><details class="course-meaning"><summary>Makna &amp; manfaat</summary><p><b>Makna:</b> Mempelajari vektor, matriks, sistem persamaan linear, dan transformasi linear sebagai cara matematis merepresentasikan banyak hubungan dan perhitungan.</p><p><b>Manfaat:</b> Menjadi fondasi komputasi grafis, pengolahan citra, analisis data, optimasi, dan machine learning.</p></details></li>
           </ul>
         </div>
       </div>
     </div>
   </section>
+
+  <style>
+  /* Detail makna tiap mata kuliah: ringkas, mudah dibuka, dan ramah layar kecil. */
+  #kuliah .course-info { display:block; padding:12px 0; border-bottom:1px solid var(--line); }
+  #kuliah .course-info:last-child { border-bottom:0; }
+  #kuliah .course-info > strong { display:block; color:var(--ink); }
+  #kuliah .course-meaning { margin-top:8px; color:var(--muted); font-size:.9rem; line-height:1.65; }
+  #kuliah .course-meaning summary { display:inline-flex; align-items:center; gap:7px; cursor:pointer; color:var(--accent); font-weight:700; font-size:.84rem; padding:5px 0; }
+  #kuliah .course-meaning summary::marker { color:var(--accent); }
+  #kuliah .course-meaning[open] summary { margin-bottom:5px; }
+  #kuliah .course-meaning p { margin:5px 0; }
+  #kuliah .course-meaning b { color:var(--ink); }
+  @media (prefers-reduced-motion:no-preference) {
+    #kuliah .course-meaning p { animation:courseMeaningIn .2s ease both; }
+    @keyframes courseMeaningIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+  }
+  </style>
 
   <section id="anggota">
     <div class="wrap">
