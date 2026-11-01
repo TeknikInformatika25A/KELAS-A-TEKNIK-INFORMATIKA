@@ -618,6 +618,16 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
     </div>
   </div>
 
+  <section id="motto" aria-label="Motto kelas">
+    <div class="wrap">
+      <p class="motto">
+        <span class="motto-1">Teknik Informatika</span>
+        <span class="motto-2">Satu Frekuensi</span>
+        <span class="motto-2">Satu Resonansi</span>
+      </p>
+    </div>
+  </section>
+
   <section id="kutipan" aria-label="Kata-kata Teknik Informatika">
     <div class="wrap">
       <figure class="kutip">
@@ -817,6 +827,13 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
   });
 })();
 </script>
+<style>
+#motto{padding:26px 0 10px}
+#motto .motto{margin:0;display:flex;flex-direction:column;gap:2px;text-transform:uppercase;font-family:var(--display);line-height:1.05;letter-spacing:.01em;text-align:left}
+#motto .motto-1{font:700 clamp(.85rem,3.2vw,1.05rem)/1.2 var(--mono);letter-spacing:.18em;color:var(--muted);margin-bottom:8px}
+#motto .motto-2{font-weight:800;font-size:clamp(2rem,9.5vw,3.6rem);color:var(--ink)}
+#motto .motto-2:last-child{display:inline-block;align-self:flex-start;background:var(--mark);color:var(--mark-ink);padding:0 .14em;margin-top:2px}
+</style>
 <footer>
   <div class="wrap">
     <span>Kelas A Teknik Informatika · Universitas Perjuangan Tasikmalaya</span>
