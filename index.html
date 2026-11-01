@@ -1126,33 +1126,10 @@ section[id], main[id] { scroll-margin-top: var(--hdr, 64px); }
 .roster-tools { grid-template-columns: 1fr !important; }
 .roster-tools .field { max-width: 480px; }
 </style>
-  <style>
-/* Tema gradasi: Laut dan Aurora. --bg tetap warna solid (dipakai header & tombol), gradasi ada di body. */
-:root[data-theme="laut"] {
-  --bg: #0A3556; --surface: rgba(4, 24, 46, .58); --ink: #F2FBFF; --muted: #CBE8F2;
-  --line: rgba(190, 235, 255, .35); --accent: #8FE3FF; --mark: #FFC83D; --mark-ink: #0E1B26;
-  color-scheme: dark;
-}
-:root[data-theme="aurora"] {
-  --bg: #0F3A33; --surface: rgba(6, 26, 28, .58); --ink: #F1FFF8; --muted: #CDEFE0;
-  --line: rgba(200, 255, 230, .32); --accent: #9BFFC9; --mark: #B79CFF; --mark-ink: #14101F;
-  color-scheme: dark;
-}
-:root[data-theme="laut"] body {
-  background-color: #0A3556;
-  background-image: linear-gradient(160deg, #0b2a4a 0%, #0b6b8a 55%, #3fb4b0 100%);
-  background-attachment: fixed;
-}
-:root[data-theme="aurora"] body {
-  background-color: #0F3A33;
-  background-image: linear-gradient(135deg, #0a2a2a 0%, #1d8f6a 50%, #5b3a9e 100%);
-  background-attachment: fixed;
-}
-:root[data-theme="laut"] .site-header, :root[data-theme="aurora"] .site-header { background: var(--bg); }
-</style>
+
 <script>
 (function () {
-  var DAFTAR = [["light","Terang"],["dark","Gelap"],["laut","Laut"],["aurora","Aurora"]];
+  var DAFTAR = [["light","Terang"],["dark","Gelap"]];
   var r = document.documentElement;
   var b = document.getElementById("themeBtn");
   function indeks() {
