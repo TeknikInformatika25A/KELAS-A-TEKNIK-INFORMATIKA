@@ -168,6 +168,19 @@ h1 {
   margin: 0;
   text-wrap: balance;
 }
+.h1-gambar { display: block; }
+.judul-img {
+  display: block;
+  width: min(100%, 440px);
+  aspect-ratio: 844 / 187;
+  background: var(--ink);
+  -webkit-mask: url("judul-kelas-a.png") left center / contain no-repeat;
+  mask: url("judul-kelas-a.png") left center / contain no-repeat;
+}
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
 .h1-top {
   display: block;
   font-family: "Graduate", var(--display);
@@ -618,7 +631,7 @@ footer .mono { font-family: var(--mono); font-size: 12.5px; }
       <div>
         <p class="eyebrow">S1 Teknik Informatika Angkatan 2025 · Universitas Perjuangan Tasikmalaya</p>
         <h1>
-          <span class="h1-top">Kelas <span class="mark">A</span></span>
+          <span class="h1-gambar"><span class="judul-img" aria-hidden="true"></span><span class="sr-only">Kelas A</span></span>
           <span class="h1-sub">Teknik Informatika</span>
         </h1>
         <p class="lead">Halaman bersama untuk mahasiswa Kelas A. Lihat foto kelas, pengurus, mata kuliah per hari, dan daftar anggota.</p>
