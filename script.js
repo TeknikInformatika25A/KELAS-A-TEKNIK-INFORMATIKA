@@ -79,6 +79,69 @@ document.addEventListener("DOMContentLoaded", () => {
   if (b) b.addEventListener("click", () => { i = (i + 1) % KUTIPAN.length; q.textContent = KUTIPAN[i]; });
 });
 
+/* ============ LATAR GELOMBANG (Beranda) ============ */
+document.addEventListener("DOMContentLoaded", () => {
+  const cv = document.getElementById("gelombang");
+  if (!cv) return;
+  const ctx = cv.getContext("2d");
+  const root = document.documentElement;
+  const diam = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let W = 0, H = 0, warna = [], raf = 0;
+
+  const rgb = hex => {
+    let h = hex.trim().replace("#", "");
+    if (h.length === 3) h = h.split("").map(c => c + c).join("");
+    const n = parseInt(h, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  };
+  const ambilWarna = () => {
+    const s = getComputedStyle(root);
+    const a = rgb(s.getPropertyValue("--accent"));
+    const b = rgb(s.getPropertyValue("--accent2"));
+    const gelap = root.getAttribute("data-theme") !== "light";
+    warna = gelap
+      ? [[a, .55], [b, .40], [a, .35]]
+      : [[a, .45], [b, .35], [a, .30]];
+  };
+  const ukur = () => {
+    const r = cv.getBoundingClientRect();
+    const d = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * d);
+    cv.height = Math.round(H * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+  };
+  const gambar = t => {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1.5;
+    warna.forEach(([c, alpha], k) => {
+      ctx.strokeStyle = "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + alpha + ")";
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 4) {
+        const y = H * 0.62
+          + Math.sin(x * 0.011 + t * 0.9 + k * 1.6) * (16 + k * 9)
+          + Math.sin(x * 0.028 - t * 0.6) * 5;
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    });
+  };
+  const putar = ts => { gambar(ts / 1000); raf = requestAnimationFrame(putar); };
+  const mulai = () => {
+    cancelAnimationFrame(raf);
+    if (diam.matches) gambar(0); else raf = requestAnimationFrame(putar);
+  };
+
+  new MutationObserver(() => { ambilWarna(); if (diam.matches) gambar(0); })
+    .observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+  new ResizeObserver(() => { ukur(); if (diam.matches) gambar(0); }).observe(cv.parentElement);
+  diam.addEventListener("change", mulai);
+
+  ambilWarna();
+  ukur();
+  mulai();
+});
+
 /* ============ GALERI ============ */
 document.addEventListener("DOMContentLoaded", () => {
   const box = document.getElementById("galeri");
