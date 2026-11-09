@@ -1,0 +1,226 @@
+/* ============ DATA YANG BISA DIEDIT ============ */
+
+// Urutan mengikuti daftar hadir. "foto" dan "peran" boleh dikosongkan.
+const ANGGOTA = [
+  { nama: "Randhan Hidayat" },
+  { nama: "Muhammad Nur Faaiz" },
+  { nama: "Aditya Maulana Firdaus" },
+  { nama: "Fabian Taufiqurrahman", peran: "Ketua Kelas", foto: "foto-anggota/fabian-taufiqurrahman.jpg", besar: "foto-anggota/fabian-taufiqurrahman-besar.jpg" },
+  { nama: "Hasbullah Ali Kumaeni" },
+  { nama: "Alwan Fauzan Sawal" },
+  { nama: "Mohamad Zidni Ilma" },
+  { nama: "Aditya Haikal Fasha" },
+  { nama: "Muhamad Husni" },
+  { nama: "Ilham Maulana" },
+  { nama: "Elvan Ghilman Aminudien", peran: "Wakil Ketua", foto: "foto-anggota/elvan-ghilman-aminudien.jpg", besar: "foto-anggota/elvan-ghilman-aminudien-besar.jpg" },
+  { nama: "Muhammad Fawwaz Khairullah", foto: "foto-anggota/muhammad-fawwaz-khairullah.jpg", besar: "foto-anggota/muhammad-fawwaz-khairullah-besar.jpg" },
+  { nama: "Syahril Maulana Fikri" },
+  { nama: "Muhammad Faza Aufa Alwan" },
+  { nama: "Adriandra", foto: "foto-anggota/adriandra.jpg", besar: "foto-anggota/adriandra-besar.jpg" },
+  { nama: "Muhamad Frian Erliana", peran: "Pembuat halaman", foto: "foto-anggota/muhamad-frian-erliana.jpg", besar: "foto-anggota/muhamad-frian-erliana-besar.jpg" },
+  { nama: "Rezki Ahmad Fauzi", foto: "foto-anggota/rezki-ahmad-fauzi.jpg", besar: "foto-anggota/rezki-ahmad-fauzi-besar.jpg" },
+  { nama: "Muhamad Igna Rizki" },
+  { nama: "Faizal Indra Nugraha" },
+  { nama: "Rizkan Anwar Fauzi", peran: "Ketua Angkatan" },
+  { nama: "Reva Salwa Adhya", peran: "Sekretaris" },
+  { nama: "Nazwa Allia Kusmana" },
+  { nama: "Sri Agnia", peran: "Bendahara" },
+  { nama: "Devina Putri Nur Aliah" },
+  { nama: "Dea Anandia Salsabila" },
+  { nama: "Nazmiatul Fitri" },
+  { nama: "Arsy Agung" },
+  { nama: "Raka Brawijaya" }
+];
+
+// Foto galeri: [nama file, deskripsi].
+const FOTO_GALERI = [
+  ["foto-kelas-1.jpg", "Mahasiswa Kelas A berfoto bersama dengan kemeja hitam di tangga depan gedung"],
+  ["foto-kelas-2.jpg", "Kelas A berfoto bersama pada malam hari di taman dengan lampu gantung"],
+  ["foto-kelas-3.jpg", "Mahasiswa Kelas A berfoto bersama di depan air terjun"],
+  ["foto-kelas-4.jpg", "Kelas A berseragam hijau dan hitam duduk di lapangan rumput"],
+  ["foto-kelas-5.jpg", "Kelas A berkumpul berpakaian hitam di sebuah kafe pada malam hari"],
+  ["foto-kelas-6.jpg", "Kelas A berkemeja putih dan celana hitam di depan gedung kampus hijau"]
+];
+
+// Daftar lagu latar.
+const LAGU = ["musik-kelas.mp3", "musik-kelas-2.mp3", "musik-kelas-3.mp3"];
+
+// Kutipan yang bergantian di Beranda.
+const KUTIPAN = [
+  "Setiap error adalah guru yang paling jujur. Baca pesannya, lalu perbaiki.",
+  "Kode yang baik ditulis untuk dibaca manusia, bukan hanya dijalankan mesin.",
+  "Bug hari ini adalah pelajaran untuk besok.",
+  "Satu frekuensi, satu resonansi: belajar dan tumbuh bersama."
+];
+
+/* ============ TEMA ============ */
+(function () {
+  const root = document.documentElement;
+  let saved = null;
+  try { saved = localStorage.getItem("kelasA-tema"); } catch (e) {}
+  root.setAttribute("data-theme", saved || "dark");
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("themeBtn");
+    if (!btn) return;
+    const paint = () => btn.textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+    paint();
+    btn.addEventListener("click", () => {
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("kelasA-tema", next); } catch (e) {}
+      paint();
+    });
+  });
+})();
+
+/* ============ MUSIK ============ */
+document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("musik");
+  const play = document.getElementById("playBtn");
+  if (!audio || !play) return;
+  audio.removeAttribute("loop");
+  audio.volume = 0.5;
+
+  let urut = 0;
+  try { urut = parseInt(sessionStorage.getItem("musikUrut") || "0", 10) % LAGU.length; } catch (e) {}
+  audio.src = LAGU[urut];
+  try {
+    const t = parseFloat(sessionStorage.getItem("musikT") || "0");
+    if (t) audio.currentTime = t;
+  } catch (e) {}
+
+  const paint = () => { play.textContent = audio.paused ? "▶" : "⏸"; play.classList.toggle("off", audio.paused); };
+  const simpan = (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} };
+
+  const next = document.createElement("button");
+  next.id = "nextBtn"; next.type = "button"; next.textContent = "⏭";
+  next.setAttribute("aria-label", "Lagu berikutnya");
+  play.after(next);
+
+  const ganti = () => {
+    urut = (urut + 1) % LAGU.length;
+    simpan("musikUrut", urut); simpan("musikT", 0);
+    audio.src = LAGU[urut];
+    audio.play().then(paint).catch(paint);
+    simpan("musikOn", "1");
+  };
+  next.addEventListener("click", ganti);
+  audio.addEventListener("ended", ganti);
+
+  paint();
+  play.addEventListener("click", () => {
+    if (audio.paused) audio.play().catch(() => {}); else audio.pause();
+    paint();
+    simpan("musikOn", audio.paused ? "0" : "1");
+  });
+  audio.addEventListener("timeupdate", () => simpan("musikT", audio.currentTime));
+  try {
+    if (sessionStorage.getItem("musikOn") === "1") audio.play().then(paint).catch(() => {});
+  } catch (e) {}
+});
+
+/* ============ KUTIPAN (Beranda) ============ */
+document.addEventListener("DOMContentLoaded", () => {
+  const q = document.getElementById("kutipan");
+  const b = document.getElementById("kutipanBtn");
+  if (!q) return;
+  let i = 0;
+  if (b) b.addEventListener("click", () => { i = (i + 1) % KUTIPAN.length; q.textContent = KUTIPAN[i]; });
+});
+
+/* ============ GALERI ============ */
+document.addEventListener("DOMContentLoaded", () => {
+  const box = document.getElementById("galeri");
+  if (!box) return;
+  const lb = document.getElementById("lightbox");
+  const lbImg = lb.querySelector("img");
+  if (!FOTO_GALERI.length) {
+    box.outerHTML = '<div class="empty">Belum ada foto.</div>';
+    return;
+  }
+  FOTO_GALERI.forEach(([f, alt]) => {
+    const fig = document.createElement("figure");
+    const img = document.createElement("img");
+    img.src = f; img.alt = alt; img.loading = "lazy";
+    fig.appendChild(img);
+    fig.addEventListener("click", () => { lbImg.src = f; lbImg.alt = alt; lb.classList.add("show"); });
+    box.appendChild(fig);
+  });
+  lb.addEventListener("click", () => lb.classList.remove("show"));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") lb.classList.remove("show"); });
+});
+
+/* ============ ANGGOTA ============ */
+document.addEventListener("DOMContentLoaded", () => {
+  const list = document.getElementById("daftarAnggota");
+  if (!list) return;
+  const cari = document.getElementById("cari");
+  const form = document.getElementById("formTambah");
+  const nama = document.getElementById("namaBaru");
+  const jumlah = document.getElementById("jumlah");
+  const lb = document.getElementById("lightbox");
+  const lbImg = lb ? lb.querySelector("img") : null;
+
+  let tambahan = [];
+  try { tambahan = JSON.parse(localStorage.getItem("kelasA-anggota-v2") || "[]"); } catch (e) {}
+  if (!Array.isArray(tambahan)) tambahan = [];
+  tambahan = tambahan.map(t => typeof t === "string" ? { nama: t } : t).filter(t => t && t.nama);
+
+  const semua = () => [...ANGGOTA, ...tambahan];
+  const render = () => {
+    const kata = (cari.value || "").toLowerCase().trim();
+    const data = semua().filter(a => a.nama.toLowerCase().includes(kata));
+    list.innerHTML = "";
+    if (!data.length) {
+      const li = document.createElement("li");
+      li.textContent = "Tidak ada anggota yang cocok dengan pencarian ini.";
+      li.style.color = "var(--muted)";
+      list.appendChild(li);
+    }
+    data.forEach(a => {
+      const li = document.createElement("li");
+      const av = document.createElement("span");
+      av.className = "avatar";
+      if (a.foto) {
+        const im = document.createElement("img");
+        im.src = a.foto; im.alt = "Foto " + a.nama; im.loading = "lazy";
+        av.appendChild(im);
+        if (a.besar && lb) {
+          av.style.cursor = "zoom-in";
+          av.addEventListener("click", () => { lbImg.src = a.besar; lbImg.alt = "Foto " + a.nama; lb.classList.add("show"); });
+        }
+      } else {
+        av.textContent = a.nama.trim().charAt(0).toUpperCase();
+      }
+      const tx = document.createElement("span");
+      tx.className = "info";
+      const n = document.createElement("span");
+      n.textContent = a.nama;
+      tx.appendChild(n);
+      if (a.peran) {
+        const p = document.createElement("small");
+        p.className = "peran"; p.textContent = a.peran;
+        tx.appendChild(p);
+      }
+      li.append(av, tx);
+      list.appendChild(li);
+    });
+    jumlah.textContent = kata ? data.length + " dari " + semua().length + " anggota" : semua().length + " anggota";
+  };
+  if (lb) {
+    lb.addEventListener("click", () => lb.classList.remove("show"));
+    document.addEventListener("keydown", e => { if (e.key === "Escape") lb.classList.remove("show"); });
+  }
+  cari.addEventListener("input", render);
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const v = nama.value.trim();
+    if (!v) return;
+    if (semua().some(a => a.nama.toLowerCase() === v.toLowerCase())) { nama.value = ""; return; }
+    tambahan.push({ nama: v });
+    try { localStorage.setItem("kelasA-anggota-v2", JSON.stringify(tambahan)); } catch (e) {}
+    nama.value = "";
+    render();
+  });
+  render();
+});

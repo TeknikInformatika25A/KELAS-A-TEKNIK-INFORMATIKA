@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Galeri · Kelas A Teknik Informatika</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+<body>
+<header class="nav"><div class="nav-inner">
+  <a class="brand" href="index.html"><em>A</em>TI · Kelas A</a>
+  <nav class="menu">
+    <a href="index.html">Beranda</a>
+    <a href="logo.html">Logo</a>
+    <a class="active" href="galeri.html">Galeri</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="pengurus.html">Pengurus</a>
+    <a href="mata-kuliah.html">Mata Kuliah</a>
+    <a href="anggota.html">Anggota</a>
+  </nav>
+  <button class="theme-btn" id="themeBtn" aria-label="Ganti tema">☀️</button>
+</div></header>
+
+<main>
+  <p class="eyebrow">Galeri</p>
+  <h2>Foto bersama Kelas A</h2>
+  <p class="lead">Ketuk foto untuk melihat ukuran penuh.</p>
+  <div class="gallery" id="galeri"></div>
+</main>
+
+<div class="lightbox" id="lightbox"><img alt="Foto Kelas A ukuran penuh"></div>
+
+<footer>Kelas A Teknik Informatika · Universitas Perjuangan Tasikmalaya · Dibuat oleh Muhamad Frian Erliana · 2026</footer>
+<div class="player"><button id="playBtn" class="off" aria-label="Putar musik">▶</button></div>
+<audio id="musik" src="musik-kelas.mp3" loop preload="none"></audio>
+</body>
+</html>

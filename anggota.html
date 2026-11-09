@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anggota · Kelas A Teknik Informatika</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+<body>
+<header class="nav"><div class="nav-inner">
+  <a class="brand" href="index.html"><em>A</em>TI · Kelas A</a>
+  <nav class="menu">
+    <a href="index.html">Beranda</a>
+    <a href="logo.html">Logo</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="pengurus.html">Pengurus</a>
+    <a href="mata-kuliah.html">Mata Kuliah</a>
+    <a class="active" href="anggota.html">Anggota</a>
+  </nav>
+  <button class="theme-btn" id="themeBtn" aria-label="Ganti tema">☀️</button>
+</div></header>
+
+<main>
+  <p class="eyebrow">Anggota</p>
+  <h2>Daftar mahasiswa Kelas A</h2>
+  <p class="lead">Cari nama teman sekelas, atau tambahkan teman yang belum tercantum lewat formulir.</p>
+
+  <div class="tools">
+    <div class="field">
+      <label for="cari">Cari anggota</label>
+      <input type="search" id="cari" placeholder="Ketik nama...">
+    </div>
+  </div>
+
+  <form class="form-box" id="formTambah">
+    <div class="tools" style="margin:0">
+      <div class="field">
+        <label for="namaBaru">Nama</label>
+        <input type="text" id="namaBaru" placeholder="Nama lengkap" autocomplete="off">
+      </div>
+      <button class="btn" type="submit">Tambah anggota</button>
+    </div>
+  </form>
+
+  <p class="count" id="jumlah"></p>
+  <ul class="members" id="daftarAnggota"></ul>
+  <p class="note">Anggota yang ditambahkan tersimpan di browser ini saja dan tidak terlihat oleh orang lain.</p>
+</main>
+
+<div class="lightbox" id="lightbox"><img alt="Foto anggota ukuran penuh"></div>
+
+<footer>Kelas A Teknik Informatika · Universitas Perjuangan Tasikmalaya · Dibuat oleh Muhamad Frian Erliana · 2026</footer>
+<div class="player"><button id="playBtn" class="off" aria-label="Putar musik">▶</button></div>
+<audio id="musik" src="musik-kelas.mp3" loop preload="none"></audio>
+</body>
+</html>
