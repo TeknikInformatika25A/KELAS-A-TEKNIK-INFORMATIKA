@@ -200,6 +200,19 @@ document.addEventListener("DOMContentLoaded", () => {
         tx.appendChild(p);
       }
       li.append(av, tx);
+      if (tambahan.includes(a)) {
+        const x = document.createElement("button");
+        x.type = "button";
+        x.className = "hapus";
+        x.textContent = "Hapus";
+        x.setAttribute("aria-label", "Hapus " + a.nama);
+        x.addEventListener("click", () => {
+          tambahan = tambahan.filter(t => t !== a);
+          try { localStorage.setItem("kelasA-anggota-v2", JSON.stringify(tambahan)); } catch (e) {}
+          render();
+        });
+        li.appendChild(x);
+      }
       list.appendChild(li);
     });
     jumlah.textContent = kata ? data.length + " dari " + semua().length + " anggota" : semua().length + " anggota";
