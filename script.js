@@ -42,9 +42,6 @@ const FOTO_GALERI = [
   ["foto-kelas-6.jpg", "Kelas A berkemeja putih dan celana hitam di depan gedung kampus hijau"]
 ];
 
-// Daftar lagu latar.
-const LAGU = ["musik-kelas.mp3", "musik-kelas-2.mp3", "musik-kelas-3.mp3"];
-
 // Kutipan yang bergantian di Beranda.
 const KUTIPAN = [
   "Setiap error adalah guru yang paling jujur. Baca pesannya, lalu perbaiki.",
@@ -72,52 +69,6 @@ const KUTIPAN = [
     });
   });
 })();
-
-/* ============ MUSIK ============ */
-document.addEventListener("DOMContentLoaded", () => {
-  const audio = document.getElementById("musik");
-  const play = document.getElementById("playBtn");
-  if (!audio || !play) return;
-  audio.removeAttribute("loop");
-  audio.volume = 0.5;
-
-  let urut = 0;
-  try { urut = parseInt(sessionStorage.getItem("musikUrut") || "0", 10) % LAGU.length; } catch (e) {}
-  audio.src = LAGU[urut];
-  try {
-    const t = parseFloat(sessionStorage.getItem("musikT") || "0");
-    if (t) audio.currentTime = t;
-  } catch (e) {}
-
-  const paint = () => { play.textContent = audio.paused ? "▶" : "⏸"; play.classList.toggle("off", audio.paused); };
-  const simpan = (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} };
-
-  const next = document.createElement("button");
-  next.id = "nextBtn"; next.type = "button"; next.textContent = "⏭";
-  next.setAttribute("aria-label", "Lagu berikutnya");
-  play.after(next);
-
-  const ganti = () => {
-    urut = (urut + 1) % LAGU.length;
-    simpan("musikUrut", urut); simpan("musikT", 0);
-    audio.src = LAGU[urut];
-    audio.play().then(paint).catch(paint);
-    simpan("musikOn", "1");
-  };
-  next.addEventListener("click", ganti);
-  audio.addEventListener("ended", ganti);
-
-  paint();
-  play.addEventListener("click", () => {
-    if (audio.paused) audio.play().catch(() => {}); else audio.pause();
-    paint();
-    simpan("musikOn", audio.paused ? "0" : "1");
-  });
-  audio.addEventListener("timeupdate", () => simpan("musikT", audio.currentTime));
-  try {
-    if (sessionStorage.getItem("musikOn") === "1") audio.play().then(paint).catch(() => {});
-  } catch (e) {}
-});
 
 /* ============ KUTIPAN (Beranda) ============ */
 document.addEventListener("DOMContentLoaded", () => {
