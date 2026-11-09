@@ -23,6 +23,9 @@ img{max-width:100%;display:block}
 .menu a.active{color:#fff;background:var(--accent)}
 .theme-btn{background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px 11px;cursor:pointer;font-size:.95rem}
 
+/* Latar jaringan (semua halaman) */
+.net-bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+
 /* Layout */
 main{flex:1;max-width:1100px;width:100%;margin:0 auto;padding:40px 20px 60px}
 .eyebrow{color:var(--accent2);font-weight:700;font-size:.8rem;letter-spacing:2px;text-transform:uppercase}

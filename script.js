@@ -126,6 +126,93 @@ document.addEventListener("DOMContentLoaded", () => {
   mulai();
 });
 
+/* ============ LATAR JARINGAN (semua halaman) ============ */
+document.addEventListener("DOMContentLoaded", () => {
+  const cv = document.createElement("canvas");
+  cv.className = "net-bg";
+  cv.setAttribute("aria-hidden", "true");
+  document.body.prepend(cv);
+  const ctx = cv.getContext("2d");
+  const root = document.documentElement;
+  const diam = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let W = 0, H = 0, titik = [], warna = null, raf = 0, last = 0;
+
+  const rgb = hex => {
+    let h = hex.trim().replace("#", "");
+    if (h.length === 3) h = h.split("").map(c => c + c).join("");
+    const n = parseInt(h, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  };
+  const rgba = (c, al) => "rgba(" + c.join(",") + "," + al + ")";
+  const acak = (a, b) => a + Math.random() * (b - a);
+  const baru = () => ({ x: acak(0, W), y: acak(0, H), vx: acak(-8, 8), vy: acak(-8, 8) });
+
+  const ambilWarna = () => {
+    const s = getComputedStyle(root);
+    warna = {
+      a: rgb(s.getPropertyValue("--accent")),
+      b: rgb(s.getPropertyValue("--accent2")),
+      gelap: root.getAttribute("data-theme") !== "light"
+    };
+  };
+  const atur = () => {
+    const r = cv.getBoundingClientRect();
+    const w = r.width || window.innerWidth, h = r.height || window.innerHeight;
+    const d = Math.min(window.devicePixelRatio || 1, 2);
+    if (W && H) titik.forEach(p => { p.x *= w / W; p.y *= h / H; });
+    W = w; H = h;
+    cv.width = Math.round(W * d);
+    cv.height = Math.round(H * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    const target = Math.max(14, Math.round(W / 26));
+    while (titik.length < target) titik.push(baru());
+    titik.length = Math.min(titik.length, target);
+  };
+  const gambar = dt => {
+    ctx.clearRect(0, 0, W, H);
+    if (dt) titik.forEach(p => {
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+    });
+    const { a, b, gelap } = warna;
+    ctx.lineWidth = 1;
+    for (let i = 0; i < titik.length; i++) {
+      for (let j = i + 1; j < titik.length; j++) {
+        const d = Math.hypot(titik[i].x - titik[j].x, titik[i].y - titik[j].y);
+        if (d < 120) {
+          ctx.strokeStyle = rgba(a, (1 - d / 120) * (gelap ? .24 : .20));
+          ctx.beginPath();
+          ctx.moveTo(titik[i].x, titik[i].y);
+          ctx.lineTo(titik[j].x, titik[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    ctx.fillStyle = rgba(b, gelap ? .5 : .45);
+    titik.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, 1.8, 0, 6.283); ctx.fill(); });
+  };
+  const putar = ts => {
+    const dt = Math.min((ts - last) / 1000, .05);
+    last = ts;
+    gambar(dt);
+    raf = requestAnimationFrame(putar);
+  };
+  const mulai = () => {
+    cancelAnimationFrame(raf);
+    if (diam.matches) gambar(0); else raf = requestAnimationFrame(putar);
+  };
+
+  window.addEventListener("resize", () => { atur(); if (diam.matches) gambar(0); });
+  new MutationObserver(() => { ambilWarna(); if (diam.matches) gambar(0); })
+    .observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+  diam.addEventListener("change", mulai);
+
+  ambilWarna();
+  atur();
+  mulai();
+});
+
 /* ============ GALERI ============ */
 document.addEventListener("DOMContentLoaded", () => {
   const box = document.getElementById("galeri");
