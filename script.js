@@ -42,14 +42,6 @@ const FOTO_GALERI = [
   ["foto-kelas-6.jpg", "Kelas A berkemeja putih dan celana hitam di depan gedung kampus hijau"]
 ];
 
-// Kutipan yang bergantian di Beranda.
-const KUTIPAN = [
-  "Setiap error adalah guru yang paling jujur. Baca pesannya, lalu perbaiki.",
-  "Kode yang baik ditulis untuk dibaca manusia, bukan hanya dijalankan mesin.",
-  "Bug hari ini adalah pelajaran untuk besok.",
-  "Satu frekuensi, satu resonansi: belajar dan tumbuh bersama."
-];
-
 /* ============ TEMA ============ */
 (function () {
   const root = document.documentElement;
@@ -69,15 +61,6 @@ const KUTIPAN = [
     });
   });
 })();
-
-/* ============ KUTIPAN (Beranda) ============ */
-document.addEventListener("DOMContentLoaded", () => {
-  const q = document.getElementById("kutipan");
-  const b = document.getElementById("kutipanBtn");
-  if (!q) return;
-  let i = 0;
-  if (b) b.addEventListener("click", () => { i = (i + 1) % KUTIPAN.length; q.textContent = KUTIPAN[i]; });
-});
 
 /* ============ LATAR GELOMBANG (Beranda) ============ */
 document.addEventListener("DOMContentLoaded", () => {
