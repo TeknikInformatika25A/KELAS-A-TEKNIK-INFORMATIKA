@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mata Kuliah · Kelas A Teknik Informatika</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+<body>
+<header class="nav"><div class="nav-inner">
+  <a class="brand" href="index.html"><em>A</em>TI · Kelas A</a>
+  <nav class="menu">
+    <a href="index.html">Beranda</a>
+    <a href="logo.html">Logo</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="pengurus.html">Pengurus</a>
+    <a class="active" href="mata-kuliah.html">Mata Kuliah</a>
+    <a href="anggota.html">Anggota</a>
+  </nav>
+  <button class="theme-btn" id="themeBtn" aria-label="Ganti tema">☀️</button>
+</div></header>
+
+<main>
+  <p class="eyebrow">Mata kuliah</p>
+  <h2>Mata kuliah Kelas A</h2>
+  <p class="lead">Daftar mata kuliah yang berjalan, dikelompokkan per hari. Buka tiap mata kuliah untuk memahami makna dan manfaatnya.</p>
+
+  <section class="day">
+    <h3>Senin</h3>
+    <details><summary>Pemrograman Web</summary>
+      <p><strong>Makna:</strong> Mempelajari cara membangun situs dan aplikasi yang berjalan melalui web, mulai dari struktur halaman, tampilan, hingga logika interaktif.</p>
+      <p><strong>Manfaat:</strong> Membekali mahasiswa untuk membuat website responsif, memahami teknologi web, dan mengembangkan layanan digital.</p></details>
+    <details><summary>Matematika Diskrit</summary>
+      <p><strong>Makna:</strong> Mempelajari konsep matematika yang menjadi dasar ilmu komputer, seperti logika, himpunan, relasi, fungsi, kombinatorika, dan graf.</p>
+      <p><strong>Manfaat:</strong> Melatih penalaran sistematis serta membantu memahami algoritma, struktur data, basis data, dan jaringan komputer.</p></details>
+    <details><summary>Praktikum Pemrograman Web</summary>
+      <p><strong>Makna:</strong> Kegiatan praktik untuk menerapkan konsep pemrograman web melalui latihan membuat dan menguji halaman atau fitur website.</p>
+      <p><strong>Manfaat:</strong> Mengasah keterampilan menulis kode, menghubungkan tampilan dengan fungsi, melakukan debugging, dan membangun proyek web sederhana.</p></details>
+    <details><summary>Sistem Operasi</summary>
+      <p><strong>Makna:</strong> Mempelajari perangkat lunak inti yang mengelola sumber daya komputer serta menjadi penghubung antara perangkat keras, aplikasi, dan pengguna.</p>
+      <p><strong>Manfaat:</strong> Memahami proses, memori, berkas, perangkat, dan pengelolaan sistem sehingga lebih siap menggunakan maupun mengelola komputer.</p></details>
+  </section>
+
+  <section class="day">
+    <h3>Selasa</h3>
+    <details><summary>Kecerdasan Buatan</summary>
+      <p><strong>Makna:</strong> Mempelajari cara merancang sistem komputer yang dapat melakukan tugas yang biasanya membutuhkan kemampuan cerdas, seperti mengenali pola, belajar, dan mengambil keputusan.</p>
+      <p><strong>Manfaat:</strong> Mengenal dasar machine learning dan penerapan AI untuk membantu menyelesaikan masalah di berbagai bidang.</p></details>
+    <details><summary>Statistika</summary>
+      <p><strong>Makna:</strong> Mempelajari cara mengumpulkan, menyajikan, menganalisis, dan menafsirkan data agar menghasilkan informasi yang bermakna.</p>
+      <p><strong>Manfaat:</strong> Membantu membaca pola data, memahami ketidakpastian, melakukan pengujian, dan mengambil keputusan berdasarkan bukti.</p></details>
+  </section>
+
+  <section class="day">
+    <h3>Kamis</h3>
+    <details><summary>Praktikum Basis Data</summary>
+      <p><strong>Makna:</strong> Latihan langsung merancang, membuat, mengisi, dan mengelola basis data menggunakan perangkat pengelola basis data.</p>
+      <p><strong>Manfaat:</strong> Melatih penggunaan SQL, pembuatan tabel, relasi, query, serta pengelolaan data untuk aplikasi.</p></details>
+    <details><summary>Basis Data</summary>
+      <p><strong>Makna:</strong> Mempelajari cara menyimpan dan mengatur data secara terstruktur agar mudah dicari, diperbarui, dijaga konsistensinya, dan digunakan bersama.</p>
+      <p><strong>Manfaat:</strong> Menjadi dasar pengembangan sistem informasi, aplikasi, transaksi digital, dan pengelolaan data dalam organisasi.</p></details>
+    <details><summary>Rekayasa Perangkat Lunak</summary>
+      <p><strong>Makna:</strong> Mempelajari pendekatan terencana untuk menganalisis kebutuhan, merancang, membangun, menguji, dan memelihara perangkat lunak.</p>
+      <p><strong>Manfaat:</strong> Membantu menghasilkan aplikasi yang sesuai kebutuhan, berkualitas, mudah dirawat, dan dikerjakan secara terstruktur dalam tim.</p></details>
+  </section>
+
+  <section class="day">
+    <h3>Sabtu</h3>
+    <details><summary>Aljabar Linear dan Matriks</summary>
+      <p><strong>Makna:</strong> Mempelajari vektor, matriks, sistem persamaan linear, dan transformasi linear sebagai cara matematis merepresentasikan banyak hubungan dan perhitungan.</p>
+      <p><strong>Manfaat:</strong> Menjadi fondasi komputasi grafis, pengolahan citra, analisis data, optimasi, dan machine learning.</p></details>
+  </section>
+</main>
+
+<footer>Kelas A Teknik Informatika · Universitas Perjuangan Tasikmalaya · Dibuat oleh Muhamad Frian Erliana · 2026</footer>
+<div class="player"><button id="playBtn" class="off" aria-label="Putar musik">▶</button></div>
+<audio id="musik" src="musik-kelas.mp3" loop preload="none"></audio>
+</body>
+</html>
