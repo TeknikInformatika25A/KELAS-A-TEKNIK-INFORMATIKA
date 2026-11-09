@@ -29,7 +29,8 @@ const ANGGOTA = [
   { nama: "Dea Anandia Salsabila" },
   { nama: "Nazmiatul Fitri" },
   { nama: "Arsy Agung" },
-  { nama: "Raka Brawijaya" }
+  { nama: "Raka Brawijaya" },
+  { nama: "Aceng Ziran" }
 ];
 
 // Foto galeri: [nama file, deskripsi].
@@ -161,7 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let tambahan = [];
   try { tambahan = JSON.parse(localStorage.getItem("kelasA-anggota-v2") || "[]"); } catch (e) {}
   if (!Array.isArray(tambahan)) tambahan = [];
-  tambahan = tambahan.map(t => typeof t === "string" ? { nama: t } : t).filter(t => t && t.nama);
+  tambahan = tambahan.map(t => typeof t === "string" ? { nama: t } : t).filter(t => t && t.nama)
+    .filter(t => !ANGGOTA.some(a => a.nama.toLowerCase() === t.nama.toLowerCase()));
 
   const semua = () => [...ANGGOTA, ...tambahan];
   const render = () => {
