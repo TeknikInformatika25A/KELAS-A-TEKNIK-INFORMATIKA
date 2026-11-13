@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kontak · Kelas A Teknik Informatika</title>
+  <meta name="description" content="Kirim pesan kepada pengelola website Kelas A Teknik Informatika Universitas Perjuangan Tasikmalaya.">
+  <style>
+    /* Semua class dan id memakai awalan "frian_" sesuai aturan soal no. 8 */
+    :root {
+      --frian_bg: #f5f7fb;
+      --frian_surface: #ffffff;
+      --frian_text: #16202e;
+      --frian_muted: #5b6678;
+      --frian_line: #d6dce8;
+      --frian_accent: #1f5fd1;
+      --frian_accent_text: #ffffff;
+      --frian_error: #b3261e;
+      --frian_ok: #1a7f45;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --frian_bg: #0f1623;
+        --frian_surface: #172033;
+        --frian_text: #e8edf6;
+        --frian_muted: #9aa7bd;
+        --frian_line: #2b3750;
+        --frian_accent: #6ea0ff;
+        --frian_accent_text: #0b1220;
+        --frian_error: #ff8a80;
+        --frian_ok: #6fd89a;
+      }
+    }
+    :root[data-theme="dark"] {
+      --frian_bg: #0f1623;
+      --frian_surface: #172033;
+      --frian_text: #e8edf6;
+      --frian_muted: #9aa7bd;
+      --frian_line: #2b3750;
+      --frian_accent: #6ea0ff;
+      --frian_accent_text: #0b1220;
+      --frian_error: #ff8a80;
+      --frian_ok: #6fd89a;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 5rem; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--frian_bg);
+      color: var(--frian_text);
+      line-height: 1.6;
+    }
+
+    /* ---------- Navigasi ---------- */
+    #frian_header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--frian_surface);
+      border-bottom: 1px solid var(--frian_line);
+    }
+    .frian_navwrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: .75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .frian_brand {
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--frian_text);
+    }
+    .frian_menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem .75rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .frian_menu a {
+      display: block;
+      padding: .35rem .6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--frian_muted);
+    }
+    .frian_menu a:hover,
+    .frian_menu a.frian_aktif {
+      color: var(--frian_accent);
+      background: color-mix(in srgb, var(--frian_accent) 12%, transparent);
+    }
+    #frian_tombol_menu {
+      display: none;
+      font: inherit;
+      padding: .4rem .75rem;
+      border: 1px solid var(--frian_line);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--frian_text);
+      cursor: pointer;
+    }
+    @media (max-width: 860px) {
+      #frian_tombol_menu { display: inline-block; }
+      .frian_menu { display: none; width: 100%; flex-direction: column; }
+      .frian_menu.frian_terbuka { display: flex; }
+      .frian_navwrap { flex-wrap: wrap; }
+    }
+
+    /* ---------- Konten ---------- */
+    .frian_main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    @media (max-width: 820px) {
+      .frian_main { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.5rem; }
+    }
+    .frian_judul { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; margin: 0 0 .75rem; }
+    .frian_intro { color: var(--frian_muted); max-width: 42ch; margin: 0 0 1.5rem; }
+    .frian_info { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
+    .frian_info li { border-left: 3px solid var(--frian_accent); padding-left: .85rem; }
+    .frian_info strong { display: block; }
+    .frian_info span { color: var(--frian_muted); font-size: .95rem; }
+
+    .frian_form {
+      background: var(--frian_surface);
+      border: 1px solid var(--frian_line);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .frian_field { margin-bottom: 1.1rem; }
+    .frian_field label { display: block; font-weight: 600; margin-bottom: .35rem; }
+    .frian_field input,
+    .frian_field select,
+    .frian_field textarea {
+      width: 100%;
+      font: inherit;
+      color: var(--frian_text);
+      background: var(--frian_bg);
+      border: 1px solid var(--frian_line);
+      border-radius: 8px;
+      padding: .65rem .8rem;
+    }
+    .frian_field textarea { min-height: 9rem; resize: vertical; }
+    .frian_field input:focus-visible,
+    .frian_field select:focus-visible,
+    .frian_field textarea:focus-visible,
+    .frian_tombol:focus-visible,
+    #frian_tombol_menu:focus-visible,
+    .frian_menu a:focus-visible {
+      outline: 3px solid var(--frian_accent);
+      outline-offset: 2px;
+    }
+    .frian_field.frian_salah input,
+    .frian_field.frian_salah select,
+    .frian_field.frian_salah textarea { border-color: var(--frian_error); }
+    .frian_pesan_error { display: none; color: var(--frian_error); font-size: .9rem; margin-top: .3rem; }
+    .frian_field.frian_salah .frian_pesan_error { display: block; }
+    .frian_hitung { text-align: right; color: var(--frian_muted); font-size: .85rem; margin-top: .25rem; }
+
+    .frian_tombol {
+      font: inherit;
+      font-weight: 600;
+      padding: .75rem 1.4rem;
+      border: 0;
+      border-radius: 8px;
+      background: var(--frian_accent);
+      color: var(--frian_accent_text);
+      cursor: pointer;
+    }
+    .frian_tombol:hover { filter: brightness(1.08); }
+    .frian_tombol_sekunder {
+      background: transparent;
+      color: var(--frian_text);
+      border: 1px solid var(--frian_line);
+      margin-left: .5rem;
+    }
+    #frian_status { margin-top: 1rem; min-height: 1.5rem; font-weight: 600; }
+    #frian_status.frian_sukses { color: var(--frian_ok); }
+    #frian_status.frian_gagal { color: var(--frian_error); }
+
+    #frian_footer {
+      border-top: 1px solid var(--frian_line);
+      text-align: center;
+      padding: 1.25rem 1rem;
+      color: var(--frian_muted);
+      font-size: .9rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="frian_header">
+    <div class="frian_navwrap">
+      <a class="frian_brand" href="index.html">ATI · Kelas A</a>
+      <button id="frian_tombol_menu" type="button" aria-expanded="false" aria-controls="frian_menu_utama">Menu</button>
+      <nav aria-label="Navigasi utama" style="width:auto">
+        <ul class="frian_menu" id="frian_menu_utama">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="logo.html">Logo</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="tentang.html">Tentang</a></li>
+          <li><a href="pengurus.html">Pengurus</a></li>
+          <li><a href="mata-kuliah.html">Mata Kuliah</a></li>
+          <li><a href="anggota.html">Anggota</a></li>
+          <li><a href="kontak.html" class="frian_aktif" aria-current="page">Kontak</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="frian_main">
+    <section>
+      <h1 class="frian_judul">Hubungi pengelola website</h1>
+      <p class="frian_intro">Punya saran, pertanyaan, atau menemukan data yang keliru di website kelas? Tulis pesan Anda di form ini.</p>
+      <ul class="frian_info">
+        <li><strong>Pengelola</strong><span>Muhamad Frian Erliana</span></li>
+        <li><strong>Kelas</strong><span>Teknik Informatika Kelas A, Angkatan 2025</span></li>
+        <li><strong>Kampus</strong><span>Universitas Perjuangan Tasikmalaya</span></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="frian_judul_form">
+      <form class="frian_form" id="frian_form_kontak" novalidate>
+        <h2 id="frian_judul_form" style="margin-top:0">Kirim pesan</h2>
+
+        <div class="frian_field">
+          <label for="frian_nama">Nama</label>
+          <input type="text" id="frian_nama" name="nama" autocomplete="name" maxlength="60" required>
+          <div class="frian_pesan_error">Isi nama minimal 3 huruf.</div>
+        </div>
+
+        <div class="frian_field">
+          <label for="frian_email">Email</label>
+          <input type="email" id="frian_email" name="email" autocomplete="email" required>
+          <div class="frian_pesan_error">Isi alamat email yang valid, misalnya nama@contoh.com.</div>
+        </div>
+
+        <div class="frian_field">
+          <label for="frian_topik">Topik</label>
+          <select id="frian_topik" name="topik" required>
+            <option value="">Pilih topik</option>
+            <option value="Saran">Saran</option>
+            <option value="Pertanyaan">Pertanyaan</option>
+            <option value="Koreksi data">Koreksi data</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+          <div class="frian_pesan_error">Pilih salah satu topik.</div>
+        </div>
+
+        <div class="frian_field">
+          <label for="frian_pesan">Pesan</label>
+          <textarea id="frian_pesan" name="pesan" maxlength="500" required></textarea>
+          <div class="frian_hitung"><span id="frian_jumlah">0</span>/500</div>
+          <div class="frian_pesan_error">Isi pesan minimal 10 karakter.</div>
+        </div>
+
+        <button type="submit" class="frian_tombol">Kirim pesan</button>
+        <button type="reset" class="frian_tombol frian_tombol_sekunder" id="frian_tombol_reset">Kosongkan</button>
+        <p id="frian_status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer id="frian_footer">
+    Kelas A Teknik Informatika · Universitas Perjuangan Tasikmalaya · Dibuat oleh Muhamad Frian Erliana · 2026
+  </footer>
+
+  <script>
+    // GANTI dengan alamat email tujuan pesan (email milik Anda)
+    var FRIAN_EMAIL_TUJUAN = "emailanda@gmail.com";
+
+    // Menu mobile
+    var frianTombolMenu = document.getElementById("frian_tombol_menu");
+    var frianMenu = document.getElementById("frian_menu_utama");
+    frianTombolMenu.addEventListener("click", function () {
+      var terbuka = frianMenu.classList.toggle("frian_terbuka");
+      frianTombolMenu.setAttribute("aria-expanded", terbuka ? "true" : "false");
+    });
+
+    // Elemen form
+    var frianForm = document.getElementById("frian_form_kontak");
+    var frianNama = document.getElementById("frian_nama");
+    var frianEmail = document.getElementById("frian_email");
+    var frianTopik = document.getElementById("frian_topik");
+    var frianPesan = document.getElementById("frian_pesan");
+    var frianJumlah = document.getElementById("frian_jumlah");
+    var frianStatus = document.getElementById("frian_status");
+
+    // Penghitung karakter
+    frianPesan.addEventListener("input", function () {
+      frianJumlah.textContent = frianPesan.value.length;
+    });
+
+    function frianTandai(input, valid) {
+      input.parentElement.classList.toggle("frian_salah", !valid);
+      input.setAttribute("aria-invalid", valid ? "false" : "true");
+      return valid;
+    }
+
+    function frianValidasi() {
+      var emailPola = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var hasil = [
+        frianTandai(frianNama, frianNama.value.trim().length >= 3),
+        frianTandai(frianEmail, emailPola.test(frianEmail.value.trim())),
+        frianTandai(frianTopik, frianTopik.value !== ""),
+        frianTandai(frianPesan, frianPesan.value.trim().length >= 10)
+      ];
+      return hasil.every(Boolean);
+    }
+
+    // Hapus pesan salah saat pengguna mengetik ulang
+    [frianNama, frianEmail, frianTopik, frianPesan].forEach(function (el) {
+      el.addEventListener("input", function () {
+        el.parentElement.classList.remove("frian_salah");
+      });
+    });
+
+    frianForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      frianStatus.className = "";
+      frianStatus.textContent = "";
+
+      if (!frianValidasi()) {
+        frianStatus.className = "frian_gagal";
+        frianStatus.textContent = "Periksa kembali isian yang bertanda merah.";
+        var pertama = frianForm.querySelector(".frian_salah input, .frian_salah select, .frian_salah textarea");
+        if (pertama) pertama.focus();
+        return;
+      }
+
+      var subjek = "[Website Kelas A] " + frianTopik.value + " dari " + frianNama.value.trim();
+      var isi = "Nama: " + frianNama.value.trim() + "\n" +
+                "Email: " + frianEmail.value.trim() + "\n" +
+                "Topik: " + frianTopik.value + "\n\n" +
+                frianPesan.value.trim();
+
+      var tautan = "mailto:" + encodeURIComponent(FRIAN_EMAIL_TUJUAN) +
+                   "?subject=" + encodeURIComponent(subjek) +
+                   "&body=" + encodeURIComponent(isi);
+
+      frianStatus.className = "frian_sukses";
+      frianStatus.textContent = "Terima kasih, " + frianNama.value.trim() + ". Aplikasi email Anda akan terbuka, tekan Kirim di sana.";
+      window.location.href = tautan;
+    });
+
+    frianForm.addEventListener("reset", function () {
+      frianJumlah.textContent = "0";
+      frianStatus.className = "";
+      frianStatus.textContent = "";
+      frianForm.querySelectorAll(".frian_salah").forEach(function (el) {
+        el.classList.remove("frian_salah");
+      });
+    });
+  </script>
+</body>
+</html>
